@@ -1,1 +1,2 @@
-# fa19-281-cloud-traders
+# Team Hackathon Project
+
