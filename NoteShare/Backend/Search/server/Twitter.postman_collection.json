@@ -1,0 +1,222 @@
+{
+	"info": {
+		"_postman_id": "43d49e9f-2e7d-4a48-8d35-9e2bfb63a475",
+		"name": "Twitter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post http://localhost:8080/api/user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"cc\",\n   \"lastname\":\"Chouccksey\",\n   \"username\":riticcka123\",\n   \"email\":\"pracdccddhi@gmail.com\",\n   \"phone\":\"78787ccxx87878\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"ritika\",\n   \"lastname\":\"Chouksey\",\n   \"username\":ritika123\",\n   \"email\":\"pracdddhi@gmail.com\",\n   \"phone\":\"78787xx87878\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"ritika\",\n   \"lastname\":\"Chouksey\",\n   \"username\":ritika123\",\n   \"email\":\"pracdddhi@gmail.com\",\n   \"phone\":\"78787xx87878\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post tweet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"msg\":\"hefffffyyy\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tweet/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tweet",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get tweets of user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/user/tweet/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"tweet",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific tweet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tweet/5dcd093a659970ee509a9b78",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tweet",
+						"5dcd093a659970ee509a9b78"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "follow user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/follow/5dcd004dbf344ec412c0f675/5dcd02d535782f3f6a6df2cb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"follow",
+						"5dcd004dbf344ec412c0f675",
+						"5dcd02d535782f3f6a6df2cb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get following",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/follow/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"follow",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unfollow",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/unfollow/5dcd004dbf344ec412c0f675/5dcd02d535782f3f6a6df2cb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"unfollow",
+						"5dcd004dbf344ec412c0f675",
+						"5dcd02d535782f3f6a6df2cb"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
