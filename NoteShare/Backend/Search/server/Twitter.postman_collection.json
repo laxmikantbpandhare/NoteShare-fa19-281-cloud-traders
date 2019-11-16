@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"cc\",\n   \"lastname\":\"Chouccksey\",\n   \"username\":riticcka123\",\n   \"email\":\"pracdccddhi@gmail.com\",\n   \"phone\":\"78787ccxx87878\"\n}"
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"cc\",\n   \"lastname\":\"Chouccksey\",\n   \"username\":\"riticcka123\",\n   \"email\":\"pracdccddhi@gmail.com\",\n   \"phone\":\"78787ccxx87878\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:8080/api/user",
