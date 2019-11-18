@@ -88,7 +88,7 @@ func CreateTweet(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)	
 	_ = json.NewDecoder(r.Body).Decode(&msg)
 	// fmt.Println(task, r.Body)
-	createTweet(params["userid"], msg)
+	CreateTweetInternal(params["userid"], msg)
 	json.NewEncoder(w).Encode(msg)
 }
 
@@ -101,7 +101,7 @@ func GetUserTweet(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	payload := getUserTweet(params["userid"])
+	payload := GetUserTweetInternal(params["userid"])
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -120,11 +120,11 @@ func GetTweet(w http.ResponseWriter, r *http.Request) {
 
 
 // Insert one task in the DB
-func createTweet(user string, msg models.Msg ) {
-	id, _ := primitive.ObjectIDFromHex(user)
+func CreateTweetInternal(user string, msg models.Msg ) {
+	//id, _ := primitive.ObjectIDFromHex(user)
 
 	insertResult, err := tweetcollection.InsertOne(context.Background(), bson.M{
-		"userid":  id,
+		"userid":  user,
 		"msg": msg.Msg,
 		"time": time.Now(),
 	})
@@ -151,9 +151,10 @@ func getTweet(tweet string) primitive.M {
 	return result
 }
 
-func getUserTweet(user string) []primitive.M {
+func GetUserTweetInternal(user string) []primitive.M {
 	fmt.Println(user)
-	id, _ := primitive.ObjectIDFromHex(user)
+	//id, _ := primitive.ObjectIDFromHex(user)
+	id := user
 	filter := bson.M{"userid": id}
 
 	count, err := tweetcollection.CountDocuments(context.Background(), filter)
@@ -182,6 +183,7 @@ func getUserTweet(user string) []primitive.M {
 		}
 
 		cur.Close(context.Background())
+		fmt.Println(results)
 		return results
 	} else
 	{
@@ -196,8 +198,10 @@ func getUserTweet(user string) []primitive.M {
 		results = append(results, userResult)
 
 		fmt.Println("Get User:", results)
+		fmt.Println("User single tweet results",results)
 		return results
 	}
 }
+
 //================================================Tweet Functions End=========================================/
 

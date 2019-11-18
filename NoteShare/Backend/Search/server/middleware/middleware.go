@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"time"
+	//"time"
 	"net/http"
 
 	"../models"
@@ -83,7 +83,7 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	payload := getAllUsers()
+	payload := GetAllUsersInternal()
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -97,7 +97,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&user)
 	// fmt.Println(task, r.Body)
 
-	insertOneUser(user)
+	InsertOneUserInternal(user)
 	json.NewEncoder(w).Encode(user)
 }
 
@@ -110,7 +110,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	payload := getUser(params["id"])
+	payload := GetUserInternal(params["id"])
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -155,7 +155,7 @@ func DeleteAllUser(w http.ResponseWriter, r *http.Request) {
 }
 
 // get all task from the DB and return it
-func getAllUsers() []primitive.M {
+func GetAllUsersInternal() []primitive.M {
 	cur, err := usercollection.Find(context.Background(), bson.D{{}})
 	if err != nil {
 		log.Fatal(err)
@@ -182,7 +182,7 @@ func getAllUsers() []primitive.M {
 }
 
 // Insert one task in the DB
-func insertOneUser(user models.User) {
+func InsertOneUserInternal(user models.User) {
 	fmt.Println("User  IS: ",user.Userid)
 	insertResult, err := usercollection.InsertOne(context.Background(), user)
 
@@ -194,7 +194,7 @@ func insertOneUser(user models.User) {
 }
 
 // task undo method, update task's status to false
-func getUser(user string) primitive.M {
+func GetUserInternal(user string) primitive.M {
 	fmt.Println(user)
 	id, _ := primitive.ObjectIDFromHex(user)
 	var result primitive.M
@@ -245,6 +245,20 @@ func deleteAllUser() int64 {
 
 	fmt.Println("Deleted Document", d.DeletedCount)
 	return d.DeletedCount
+}
+
+func GetUserByUserIdInternal(user string) primitive.M {
+	fmt.Println(user)
+	var result primitive.M
+	filter := bson.M{"userid": user}
+	err := usercollection.FindOne(context.Background(), filter).Decode(&result)
+	fmt.Println("", err)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("Get User:", result)
+	return result
 }
 
 //================================================User Functions End=========================================/

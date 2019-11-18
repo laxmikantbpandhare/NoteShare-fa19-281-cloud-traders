@@ -19,7 +19,7 @@ type User struct {
 
 type Tweet struct {
 	ID     primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Userid primitive.ObjectID `bson:"userid" json:"userid"`
+	Userid string `bson:"userid" json:"userid"`
 	Msg    string `bson:"msg" json:"msg"`
 	Created time.Time `bson:"time" json:"time"`
 }

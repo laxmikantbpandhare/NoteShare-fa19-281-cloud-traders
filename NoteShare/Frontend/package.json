@@ -1,0 +1,40 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "3.1.2",
+    "sw-precache": "^5.2.1"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "firebase": "^7.3.0",
+    "immutability-helper": "3.0.1",
+    "jwt-decode": "^2.2.0",
+    "lodash": "4.17.15",
+    "material-ui": "^0.20.2",
+    "moment": "2.24.0",
+    "prop-types": "^15.7.2",
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "5.0.1",
+    "react-with-firebase-auth": "^1.1.0",
+    "redux": "^4.0.4",
+    "redux-form": "^8.2.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:5001",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
