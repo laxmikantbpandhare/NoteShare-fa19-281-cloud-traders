@@ -21,8 +21,8 @@ import (
 // DB connection string
 // const connectionString = "mongodb://localhost:27017"
 //const connectionString = "mongodb://admin:admin@52.36.250.105/?authSource=admin&replicaSet=cmpe281"
-const connectionString = "mongodb://admin:admin@3.82.16.187/?authSource=admin"
-//const connectionString = "mongodb+srv://ruchika:ruchika@canvas-4ygup.mongodb.net/twitter?retryWrites=true&w=majority"
+//const connectionString = "mongodb://admin:admin@3.82.16.187/?authSource=admin"
+const connectionString = "mongodb+srv://ruchika:ruchika@canvas-4ygup.mongodb.net/twitter?retryWrites=true&w=majority"
 
 // Database Name
 const dbName = "twitter"
