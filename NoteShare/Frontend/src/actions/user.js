@@ -11,6 +11,7 @@ import firebase from '../config/fire';
 // import withFirebaseAuth from 'react-with-firebase-auth'
 
 import { beginApiCall, apiCallError } from '../actions/apistatus'
+import {SET_TWEETS,SET_TWEET} from './tweet'
 
 export const USER_CURRENT_SET = 'USER_CURRENT_SET'
 
@@ -74,37 +75,31 @@ export const RESET_ERROR = "RESET_ERROR";
 
 var uuid = "";
 
-export function postLogin (credentials) {
-  return dispatch => {
-    return fetch(`${ config.url.api }user/login`, {
-      method: 'post',
+export function postLogin (uuid,callback) {
+  
+    console.log("In post login")
+    return fetch(`${ config.url.api }api/user/${ uuid }`, {
+      method: 'get',
 
-      body: JSON.stringify(credentials),
+     //body: JSON.stringify(uuid),
 
       headers: {
         'Content-Type': 'application/json'
       }
     })
       .then(response => {
-        if (response.ok) {
+        if (response) {
           console.log(response)
-          localStorage.setItem('uuid', response.uid)
+          //localStorage.setItem('uuid', response.uid)
+          //dispatch(setCurrentUser(response))
 
           return response.json()
         }
       })
-      .then(response => {
-        if (response.success) {
-          const token = response.data.token
-
-          localStorage.setItem('token', token)
-
-          dispatch(setCurrentUser(jwtDecode(token)))
-        }
-
-        return response
+      .then(data=> {
+        callback(data);
       })
-  }
+  
 }
 
 //export function postRegister (credentials) {
@@ -131,7 +126,7 @@ export function postLogin (credentials) {
     })
       .then(response => {
         
-        console.log("kuchto",response);
+        console.log("register response ",response);
         response.json()
         .then(data=> {
           callback1(data);
@@ -149,16 +144,42 @@ export function setCurrentUser (user) {
   }
 }
 
-export function userLogout () {
+export function userLogout (callback) {
   return dispatch => {
-    localStorage.removeItem('token')
+    localStorage.removeItem('uuid')
     //localStorage.removeItem('uuid')
 
     dispatch(setCurrentUser({}))
+    dispatch(
+      {
+        type: SET_TWEETS,
+        tweets: []
+      } 
+    )
+    dispatch(
+      {
+        type: SET_TWEET,
+        tweet: {}
+      } 
+    )
+    dispatch(
+      {
+        type: "SIGNUP_SUCCESS",
+        payload: {}
+      } 
+    )
+    dispatch(
+      {
+        type: "SIGNIN_SUCCESS",
+        payload: {}
+      } 
+    )
 
     return {success: true}
+    callback()
   }
 }
+
 
 
 
@@ -235,7 +256,7 @@ export function userLogout () {
 
 
 // Signing in with Firebase
-export const signin = (input, callback) => async dispatch => {
+export const signin = (input) => dispatch => {
   try {
     dispatch(beginApiCall());
 
@@ -250,15 +271,28 @@ export const signin = (input, callback) => async dispatch => {
 
           console.log("IF", data.user.emailVerified);
 
-          var payload = {successLogin: "true"};
+          
           console.log(data)
           localStorage.setItem('uuid', data.user.uid)
-
-
-          dispatch({
+          postLogin(data.user.uid,response => {
+            var payload = {successLogin: "true"};
+            console.log(response)
+            dispatch({
             type: "SIGNIN_SUCCESS",
             payload: payload
-          });
+            });
+          dispatch({
+            type: "USER_CURRENT_SET",
+            user: response
+          })
+
+          })
+
+          // dispatch({
+          //   type: "SIGNIN_SUCCESS",
+          //   payload: payload
+          // });
+
       })
       .catch(() => {
         dispatch(apiCallError());
