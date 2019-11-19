@@ -24,13 +24,13 @@ class UserButtonLogged extends Component {
   logout (event) {
     event.preventDefault()
 
-    this.props.userLogout()
+    this.props.userLogout(()=>this.props.history.push("/user/login"))
   }
 
   render () {
     return (
       <>
-        <Link to="/tweet/add"><FlatButton label="Tweet"/></Link>
+        <Link to="/tweet/add"><FlatButton label="Create Note"/></Link>
         <FlatButton label="Sign out" onClick={this.logout.bind(this)} />
       </>
     )
