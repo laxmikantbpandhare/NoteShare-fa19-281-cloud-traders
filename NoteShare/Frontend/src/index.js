@@ -1,12 +1,56 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+// Imports
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { createStore, compose, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import jwtDecode from 'jwt-decode'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// UI Imports
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// App Imports
+import registerServiceWorker from './registerServiceWorker'
+import { setCurrentUser } from './actions/user'
+import rootReducer from './reducers/root'
+import App from './app'
+import './index.css'
+
+// Store
+const store = createStore(
+  rootReducer,
+
+  compose(
+    applyMiddleware(thunk)
+  )
+)
+
+// User Authentication
+// const token = localStorage.getItem('token')
+// if (token && token !== 'undefined' && token !== '') {
+//   store.dispatch(setCurrentUser(jwtDecode(token)))
+// }
+
+// // User Authentication
+// const uuid = localStorage.getItem('uuid')
+// if (uuid && uuid !== 'undefined' && uuid !== '') {
+//   store.dispatch(setCurrentUser(jwtDecode(uuid)))
+// }
+
+// Render App
+window.store = store
+ReactDOM.render(
+  <Provider store={store}>
+    <MuiThemeProvider>
+      <Router>
+        <App />
+      </Router>
+    </MuiThemeProvider>
+  </Provider>,
+
+  document.getElementById('root')
+)
+
+// Service Worker
+registerServiceWorker()
