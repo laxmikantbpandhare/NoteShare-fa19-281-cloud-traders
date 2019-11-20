@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
+	//"log"
 	//"time"
 	"net/http"
 
@@ -47,14 +47,14 @@ func init() {
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	// Check the connection
 	err = client.Ping(context.TODO(), nil)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Connected to MongoDB!")
@@ -83,7 +83,7 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	payload := getAllUsers()
+	payload := GetAllUsersFunc()
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -97,7 +97,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&user)
 	// fmt.Println(task, r.Body)
 
-	insertOneUser(user)
+	InsertOneUser(user)
 	json.NewEncoder(w).Encode(user)
 }
 
@@ -110,7 +110,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	payload := getUser(params["id"])
+	payload := GetUserFunc(params["id"])
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -123,7 +123,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	updateUser(params["id"])
+	UpdateUserFunc(params["id"])
 	json.NewEncoder(w).Encode(params["id"])
 }
 
@@ -136,7 +136,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Methods", "DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	params := mux.Vars(r)
-	deleteUser(params["id"])
+	DeleteUserFunc(params["id"])
 	json.NewEncoder(w).Encode(params["id"])
 	// json.NewEncoder(w).Encode("Task not found")
 
@@ -148,17 +148,17 @@ func DeleteAllUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "DELETE")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	count := deleteAllUser()
+	count := DeleteAllUserFunc()
 	json.NewEncoder(w).Encode(count)
 	// json.NewEncoder(w).Encode("Task not found")
 
 }
 
 // get all task from the DB and return it
-func getAllUsers() []primitive.M {
+func GetAllUsersFunc() []primitive.M {
 	cur, err := usercollection.Find(context.Background(), bson.D{{}})
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	var results []primitive.M
@@ -166,7 +166,7 @@ func getAllUsers() []primitive.M {
 		var result bson.M
 		e := cur.Decode(&result)
 		if e != nil {
-			log.Fatal(e)
+			fmt.Println("err:", err)
 		}
 		// fmt.Println("cur..>", cur, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
 		results = append(results, result)
@@ -174,7 +174,7 @@ func getAllUsers() []primitive.M {
 	}
 
 	if err := cur.Err(); err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	cur.Close(context.Background())
@@ -182,27 +182,27 @@ func getAllUsers() []primitive.M {
 }
 
 // Insert one task in the DB
-func insertOneUser(user models.User) {
+func InsertOneUser(user models.User) {
 	fmt.Println("User  IS: ",user.Userid)
 	insertResult, err := usercollection.InsertOne(context.Background(), user)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Inserted a Single Record ", insertResult.InsertedID)
 }
 
 // task undo method, update task's status to false
-func getUser(user string) primitive.M {
+func GetUserFunc(user string) primitive.M {
 	fmt.Println(user)
-	id, _ := primitive.ObjectIDFromHex(user)
+	id := user
 	var result primitive.M
-	filter := bson.M{"_id": id}
+	filter := bson.M{"userid": id}
 	err := usercollection.FindOne(context.Background(), filter).Decode(&result)
 	fmt.Println("", err)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Get User:", result)
@@ -210,37 +210,50 @@ func getUser(user string) primitive.M {
 }
 
 // task undo method, update task's status to false
-func updateUser(user string) {
+func UpdateUserFunc(user string) {
 	fmt.Println(user)
 	id, _ := primitive.ObjectIDFromHex(user)
 	filter := bson.M{"_id": id}
 	update := bson.M{"$set": bson.M{"status": false}}
 	result, err := usercollection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("modified count: ", result.ModifiedCount)
 }
 
 // delete one task from the DB, delete by ID
-func deleteUser(user string) {
+func DeleteUserFunc(user string) {
 	fmt.Println(user)
 	id, _ := primitive.ObjectIDFromHex(user)
 	filter := bson.M{"_id": id}
 	d, err := usercollection.DeleteOne(context.Background(), filter)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
+	}
+
+	fmt.Println("Deleted Document", d.DeletedCount)
+}
+
+// delete one task from the DB, delete by ID
+func DeleteUserFuncTest(user interface{}) {
+	fmt.Println(user)
+	id, _ := user.(primitive.ObjectID)
+	filter := bson.M{"_id": id}
+	d, err := usercollection.DeleteOne(context.Background(), filter)
+	if err != nil {
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Deleted Document", d.DeletedCount)
 }
 
 // delete all the tasks from the DB
-func deleteAllUser() int64 {
+func DeleteAllUserFunc() int64 {
 	d, err := usercollection.DeleteMany(context.Background(), bson.D{{}}, nil)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Deleted Document", d.DeletedCount)
