@@ -1,0 +1,248 @@
+{
+	"info": {
+		"_postman_id": "2633ab9c-fa92-4523-9254-6cb035287553",
+		"name": "NoteShare",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post http://localhost:8080/api/user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"cc\",\n   \"lastname\":\"Chouccksey\",\n   \"username\":riticcka123\",\n   \"email\":\"pracdccddhi@gmail.com\",\n   \"phone\":\"78787ccxx87878\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"ritika\",\n   \"lastname\":\"Chouksey\",\n   \"username\":ritika123\",\n   \"email\":\"pracdddhi@gmail.com\",\n   \"phone\":\"78787xx87878\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"ritika\",\n   \"lastname\":\"Chouksey\",\n   \"username\":ritika123\",\n   \"email\":\"pracdddhi@gmail.com\",\n   \"phone\":\"78787xx87878\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post tweet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"msg\":\"hefffffyyy\"}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tweet/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tweet",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get tweets of user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/user/tweet/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"tweet",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get specific tweet",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tweet/5dcd093a659970ee509a9b78",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tweet",
+						"5dcd093a659970ee509a9b78"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "follow user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/follow/5dcd004dbf344ec412c0f675/5dcd02d535782f3f6a6df2cb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"follow",
+						"5dcd004dbf344ec412c0f675",
+						"5dcd02d535782f3f6a6df2cb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get following",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/follow/5dcd004dbf344ec412c0f675",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"follow",
+						"5dcd004dbf344ec412c0f675"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unfollow",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/unfollow/5dcd004dbf344ec412c0f675/5dcd02d535782f3f6a6df2cb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"unfollow",
+						"5dcd004dbf344ec412c0f675",
+						"5dcd02d535782f3f6a6df2cb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"email\":\"pracdcccddhi@gmail.com\",\n\"firstname\":\"newuser123\",\"followee\":null,\n\"lastname\":\"Choucckseyyy\",\n\"phone\":\"78787ccxx87878\",\n\"profileimage\":\"http://somes3url.com\",\n\"time\":\"0000-12-31T16:07:02-07:52\",\n\"tweets\":null,\n\"userid\":\"10323\",\n\"username\":\"riticcka123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/profile/5dd32185a09d44ba528a54fc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"profile",
+						"5dd32185a09d44ba528a54fc"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
