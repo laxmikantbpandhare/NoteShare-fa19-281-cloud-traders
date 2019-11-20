@@ -12,6 +12,7 @@ type User struct {
 	Username string `bson:"username" json:"username"`
 	Email string `bson:"email" json:"email"`
 	Phone string `bson:"phone" json:"phone"`
+	ProfileImage string `bson:"profileimage" json:"profileimage"`
 	Tweets []Tweet `bson:"tweets"`
 	Followee []User `bson:"followee"`
 	CreatedAt time.Time `bson:"time" json:"time"`

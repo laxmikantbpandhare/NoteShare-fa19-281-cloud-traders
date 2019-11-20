@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "43d49e9f-2e7d-4a48-8d35-9e2bfb63a475",
-		"name": "Twitter",
+		"_postman_id": "2633ab9c-fa92-4523-9254-6cb035287553",
+		"name": "NoteShare",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -212,6 +212,32 @@
 						"unfollow",
 						"5dcd004dbf344ec412c0f675",
 						"5dcd02d535782f3f6a6df2cb"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update user profile",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"email\":\"pracdcccddhi@gmail.com\",\n\"firstname\":\"newuser123\",\"followee\":null,\n\"lastname\":\"Choucckseyyy\",\n\"phone\":\"78787ccxx87878\",\n\"profileimage\":\"http://somes3url.com\",\n\"time\":\"0000-12-31T16:07:02-07:52\",\n\"tweets\":null,\n\"userid\":\"10323\",\n\"username\":\"riticcka123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/user/profile/5dd32185a09d44ba528a54fc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"user",
+						"profile",
+						"5dd32185a09d44ba528a54fc"
 					]
 				}
 			},
