@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"time"
+	//"time"
 	"net/http"
 
 	"../models"
@@ -127,6 +127,20 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(params["id"])
 }
 
+// TaskComplete update task route
+func UpdateUserProfile(w http.ResponseWriter, r *http.Request) {
+
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "PUT")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	var user models.User
+	_ = json.NewDecoder(r.Body).Decode(&user)
+	params := mux.Vars(r)
+	updateUserProfile(params["id"],user)
+	json.NewEncoder(w).Encode(user)
+}
+
 
 
 // DeleteTask delete one task route
@@ -215,6 +229,24 @@ func updateUser(user string) {
 	id, _ := primitive.ObjectIDFromHex(user)
 	filter := bson.M{"_id": id}
 	update := bson.M{"$set": bson.M{"status": false}}
+	result, err := usercollection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println("modified count: ", result.ModifiedCount)
+}
+
+// task undo method, update task's status to false
+func updateUserProfile(userid string,user models.User) {
+	fmt.Println(userid)
+	id, _ := primitive.ObjectIDFromHex(userid)
+	filter := bson.M{"_id": id}
+	update := bson.M{"$set": bson.M{"email":user.Email,
+"firstname":user.Firstname,
+"lastname":user.Lastname,
+"phone":user.Phone,
+"profileimage":user.ProfileImage}}
 	result, err := usercollection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
 		log.Fatal(err)
