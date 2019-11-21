@@ -1,23 +1,57 @@
-node {  
-    stage('Pull from Github') { 
-        // 
-        // git 'https://github.com/manvithis/CICD_test'
+node { 
+    
+    stage('Pull_from_Github') { 
+        checkout scm
+	slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+	stage('notification to slack'){
+		slackSend color: 'good', message: "commited on branch : ${env.BRANCH_NAME}"
+	    
     }
-    stage('Run DockerFile') { 
-        // 
-     sh "docker build -t 5467438/my-app:${env.BUILD_NUMBER} ."
+    boolean unittestPassed = true	
+    stage('Running unit tests')
+    { 
+
+	   	sh " bash goshell.sh"
+		slackSend color: 'good', message: "All the unit Test cases were Passing"   
+	  
     }
-    stage('Push Docker Image'){
-     // some block
-    withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
-    sh "docker login -u 5467438 -p ${dockerHubPwd}"
+
+    stage('Building_DockerFile') { 
+	slackSend color: 'good', message: "Building Docker-File"
+	sh "chmod 755 server"    
+        sh "docker build -t 5467438/my-app:${env.BUILD_NUMBER} ."
+	 }
+    }
+    stage ("wait_docker_run") {
+         echo 'Waiting 5 sec before running Docker image'
+         sleep 5 
+    }
+    stage('Push_Docker_Image'){
+	slackSend color: 'good', message: "Pushing the image into5467438/my-app:${env.BUILD_NUMBER}"
+        withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+        sh "docker login -u 5467438 -p ${dockerHubPwd}"
     }    
-     sh "docker push 5467438/my-app:${env.BUILD_NUMBER}"
+        sh "docker push 5467438/my-app:${env.BUILD_NUMBER}"
    }
-   stage('Run Container on Dev Server'){
-     def dockerRun = 'docker run -p 8080:8080 -d --name my-app kammana/my-app:2.0.0'
-     sshagent(['dev-server']) {
-       sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.18.198 ${dockerRun}"
+   stage ("wait_docker_run") {
+         echo 'Waiting 20 sec before running Docker image'
+         sleep 20 
+        withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
+        sh "docker login -u 5467438 -p ${dockerHubPwd}"
+        }    
+         sh "docker run --name docker${env.BUILD_NUMBER} -td -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
+    }
+    stage('Testing') {
+	 slackSend color: 'good', message: "Running Api-tests"  
+	 sh "chmod +x ./runtest.sh" 
+         sh "./runtest.sh"
+	 
+    }
+    stage('cleaning') {
+		sh 'docker container stop $(docker container ls -aq)'
+		sh 'docker container rm $(docker container ls -aq)'
+		deleteDir()
      }
-   }
+   
+
 }
