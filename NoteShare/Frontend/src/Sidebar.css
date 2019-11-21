@@ -1,0 +1,21 @@
+.navbar-fixed-left {
+    width: 15%;
+    position: fixed;
+    border-radius: 0;
+    height: 100%;
+  }
+
+  .navbar-fixed-left .navbar-nav > li{
+    float: none;
+    width: 139px;
+  }
+
+  .navbar-fixed-left + .container{
+    padding-left: 160px;
+  }
+
+  .nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 10px;
+  }
