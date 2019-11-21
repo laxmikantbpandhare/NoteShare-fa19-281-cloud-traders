@@ -38,7 +38,9 @@ class TweetAdd extends Component {
     this.setState({isLoading: true})
 
     let input = {}
-    input.msg = this.state.text
+    input.topic = this.state.topic
+    input.data = this.state.text
+    input.name = "createTodoItem"
 
     if (input.text !== '') {
       this.props.postTweet(input).then((response) => {
@@ -50,7 +52,7 @@ class TweetAdd extends Component {
         }
       })
     } else {
-      this.setState({isLoading: false, error: 'Tweet cannot be empty.', notification: false})
+      this.setState({isLoading: false, error: 'Note cannot be empty.', notification: false})
     }
   }
 
@@ -66,7 +68,7 @@ class TweetAdd extends Component {
 
     return (
       <section>
-        <h2><span role="img" aria-label="tweet">💭</span> Tweet to the world</h2>
+        <h2><span role="img" aria-label="tweet">💭</span> Note to the world</h2>
 
         <br/>
 
@@ -75,6 +77,16 @@ class TweetAdd extends Component {
         {this.state.message ? <Card><CardText color={blue500}>{this.state.message}</CardText></Card> : ''}
 
         <form id="form-tweet" onSubmit={this.onSubmit.bind(this)}>
+        <TextField
+            name="topic"
+            value={this.state.topic}
+            onChange={this.onChange.bind(this)}
+            floatingLabelText="Your Topic"
+            multiLine={true}
+            rows={1}
+            fullWidth={true}
+          />
+
           <TextField
             name="text"
             value={this.state.text}
@@ -93,9 +105,9 @@ class TweetAdd extends Component {
 
         <Snackbar
           open={this.state.notification}
-          message="Tweet has been posted"
+          message="Note has been posted"
           autoHideDuration={4000}
-          action="View Tweet"
+          action="View Note"
           onActionClick={() => (this.setState({viewTweet: true}))}
         />
 
