@@ -1,5 +1,5 @@
 // Imports
-import jwtDecode from 'jwt-decode'
+//  dimport jwtDecode from 'jwt-decode'
 
 // App Imports
 import config from '../config'
@@ -175,7 +175,7 @@ export function userLogout (callback) {
       } 
     )
 
-    return {success: true}
+    //return {success: true}
     callback()
   }
 }
@@ -306,3 +306,32 @@ export const signin = (input) => dispatch => {
     dispatch({ type: SIGNIN_ERROR, payload: "Invalid login credentials" });
   }
 };
+
+export function updateProfile (input) {
+  const uuid = localStorage.getItem('uuid')
+  return dispatch => {
+  console.log("In update profile")
+  return fetch(`${ config.url.api }api/user/profile/${ uuid }`, {
+    method: 'put',
+
+   body: JSON.stringify(input),
+
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+    .then(response => {
+      if (response) {
+        console.log(response)
+        //localStorage.setItem('uuid', response.uid)
+        //dispatch(setCurrentUser(response))
+
+        return response.json()
+      }
+    })
+    // .then(data=> {
+    //   callback(data);
+    // })
+  }
+
+}
