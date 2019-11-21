@@ -65,8 +65,9 @@ export function fetchTweet (tweetId) {
 export function postTweet (tweet) {
   const uuid = localStorage.getItem('uuid')
   console.log(tweet)
+  tweet.userid = uuid
   return dispatch => {
-    return fetch(`${ config.url.api }api/tweet/${ uuid }`, {
+    return fetch(`${ config.url.api }api/cmd/${ uuid }`, {
       method: 'post',
 
       body: JSON.stringify(tweet),
@@ -79,3 +80,20 @@ export function postTweet (tweet) {
           response.json())
   }
 }
+// export function postTweet (tweet) {
+//   const uuid = localStorage.getItem('uuid')
+//   console.log(tweet)
+//   return dispatch => {
+//     return fetch(`${ config.url.api }api/tweet/${ uuid }`, {
+//       method: 'post',
+
+//       body: JSON.stringify(tweet),
+
+//       headers: {
+//         'Content-Type': 'text/plain'
+//       }
+//     })
+//       .then(response =>
+//           response.json())
+//   }
+// }
