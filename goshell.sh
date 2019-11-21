@@ -27,12 +27,12 @@ export PATH=$PATH:$GOPATH/bin
 go get github.com/stretchr/testify/assert
 export PATH=$PATH:$GOPATH/bin
 # build
-cd NoteShare/Backend/Notes/server
+cd NoteShare/Backend/User/server
 go build
 echo "go is running"
 ./server &
 cd tests
-go test notes_test.go
+go test user_test.go
 if [ $? -ne 0 ];
 then
     echo "fail to go build"
