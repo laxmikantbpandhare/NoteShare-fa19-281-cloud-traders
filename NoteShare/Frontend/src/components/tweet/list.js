@@ -8,6 +8,7 @@ import moment from 'moment'
 import { Card, CardTitle } from 'material-ui/Card'
 
 function TweetList ({tweets}) {
+  console.log(tweets)
   const emptyMessage = (
     <p>No tweets to show.</p>
   )
@@ -22,7 +23,8 @@ function TweetList ({tweets}) {
 
   return (
     <div>
-      {tweets.length === 0 ? emptyMessage : tweetsList}
+      {
+        (tweets.length == 0 && tweets ==[] && tweets ==[null] && tweets ==null && tweets[0] ==null ) ? emptyMessage : tweetsList}
     </div>
   )
 }
