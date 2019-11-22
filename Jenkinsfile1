@@ -21,7 +21,7 @@ pipeline {
             steps{
                 sh "chmod +x change-version.yaml"
                 sh "./change-version.yaml ${DOCKER_TAG}"
-                sshagent(['kops-machine']) {
+                sshagent(['k8-passwords']) {
                     sh "scp -o StrictHostKeyChecking=no service.yml node-app-pod.ymladmin@api.cloud.traders.us:/home/admin/"
                     script{
                         try{
