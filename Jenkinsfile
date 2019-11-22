@@ -1,5 +1,5 @@
 node { 
-    
+    try {
     stage('Pull_from_Github') { 
         checkout scm
 	slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
@@ -81,12 +81,11 @@ node {
 	 }
 	     
       }
-	post {
-        always {
-          
+      } 
+      finally {
 		sh 'docker container stop $(docker container ls -aq)'
 		sh 'docker container rm $(docker container ls -aq)'
 		deleteDir()
             }
-	}
+	
 }
