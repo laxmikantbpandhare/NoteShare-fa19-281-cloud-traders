@@ -53,7 +53,7 @@ node {
 		sh 'docker container rm $(docker container ls -aq)'
 		deleteDir()
      }
-	stage ('Deploy_on_dev'){
+	stage ('Dev-server-test'){
 		def docker_command ="docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
 		sshagent(['slave1-cred']) {
     			// some block
