@@ -83,7 +83,8 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "GET")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
-	payload := GetAllUsersFunc()
+	params := mux.Vars(r)
+	payload := GetAllUsersFunc(params["id"])
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -155,8 +156,10 @@ func DeleteAllUser(w http.ResponseWriter, r *http.Request) {
 }
 
 // get all task from the DB and return it
-func GetAllUsersFunc() []primitive.M {
-	cur, err := usercollection.Find(context.Background(), bson.D{{}})
+func GetAllUsersFunc(id string) []primitive.M {
+	fmt.Println("In get all users")
+	filter := bson.M{"userid": bson.M{"$ne":id}}
+	cur, err := usercollection.Find(context.Background(), filter)
 	if err != nil {
 		fmt.Println("err:", err)
 	}
@@ -178,6 +181,7 @@ func GetAllUsersFunc() []primitive.M {
 	}
 
 	cur.Close(context.Background())
+	fmt.Println("results:", results)
 	return results
 }
 

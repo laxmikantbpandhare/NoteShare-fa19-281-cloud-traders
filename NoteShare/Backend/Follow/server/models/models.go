@@ -26,8 +26,8 @@ type Tweet struct {
 }
 
 type Follow struct {
-	ID     primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Userid []primitive.ObjectID `bson:"userid" json:"userid"`
+	ID     string `json:"_id,omitempty" bson:"_id,omitempty"`
+	Userid []string `bson:"userid" json:"userid"`
 }
 
 type Msg struct {

@@ -75,6 +75,50 @@ func PingHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(payload)
 }
 
+
+
+// GetAllTask get all the task route
+func GetAllUsersSearch(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Context-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+	params := mux.Vars(r)
+	payload := GetAllUsersSearchFunc(params["id"])
+	json.NewEncoder(w).Encode(payload)
+}
+
+
+// get all task from the DB and return it
+func GetAllUsersSearchFunc(id string) []primitive.M {
+	fmt.Println("In get all users")
+	filter := bson.M{"userid": bson.M{"$ne":id}}
+	cur, err := usercollection.Find(context.Background(), filter)
+	if err != nil {
+		fmt.Println("err:", err)
+	}
+
+	var results []primitive.M
+	for cur.Next(context.Background()) {
+		var result bson.M
+		e := cur.Decode(&result)
+		if e != nil {
+			fmt.Println("err:", err)
+		}
+		// fmt.Println("cur..>", cur, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
+		results = append(results, result)
+
+	}
+
+	if err := cur.Err(); err != nil {
+		fmt.Println("err:", err)
+	}
+
+	cur.Close(context.Background())
+	fmt.Println("results:", results)
+	return results
+}
+
 //================================================User Functions Start=========================================/
 
 // GetAllTask get all the task route
