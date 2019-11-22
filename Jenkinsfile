@@ -46,7 +46,7 @@ node {
          sh "./runtest.sh"
 	 
     }
-   	 stage ('HTML_REPORT')
+   stage ('HTML_REPORT')
      {
 	publishHTML([allowMissing: false, 
 		     alwaysLinkToLastBuild: false,
@@ -57,12 +57,18 @@ node {
 		     reportTitles: ''])	
 
     }
-	stage('Remove Previous Container'){
+    stage('Remove Previous Container'){
 
 		def dockerRm = 'docker rm -f dockerz'
+	        try{
 		sshagent(['Dev-server-test']) {
 			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRm}"
 		}
+		}catch(error){
+		//  do nothing if there is an exception
+		      slackSend color: 'bad', message: "No Containers to remove or error" 
+	      }
+			
 	
      }
 
