@@ -57,12 +57,7 @@ node {
 		     reportTitles: ''])	
 
     }
-	stage('cleaning') 
-    {
-		sh 'docker container stop $(docker container ls -aq)'
-		sh 'docker container rm $(docker container ls -aq)'
-		deleteDir()
-     }
+
 	stage ('Dev-server-test')
      {
 		sh "chmod +x ./docker-cleaner.sh" 
@@ -74,5 +69,11 @@ node {
 	     sh "docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
 		
 	}
+		stage('cleaning') 
+      {
+		sh 'docker container stop $(docker container ls -aq)'
+		sh 'docker container rm $(docker container ls -aq)'
+		deleteDir()
+      }
 	
 }
