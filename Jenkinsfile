@@ -65,7 +65,7 @@ node {
      }
 	stage ('Dev-server-test')
      {
-		def docker_command =""
+		sh "chmod +x ./docker-cleaner.sh" 
 		sshagent(['Dev-server-test']) {
     			// some block
 			sh 'ssh -o StrictHostKeyChecking=no centos@3.234.209.140'
