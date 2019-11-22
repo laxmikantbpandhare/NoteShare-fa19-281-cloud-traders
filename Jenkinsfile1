@@ -22,12 +22,12 @@ pipeline {
                 sh "chmod +x change-version.sh"
                 sh "./change-version.sh ${DOCKER_TAG}"
                 sshagent(['kops-machine']) {
-                    sh "scp -o StrictHostKeyChecking=no services.yml node-app-pod.yml ec2-user@52.66.70.61:/home/ec2-user/"
+                    sh "scp -o StrictHostKeyChecking=no service.yml node-app-pod.ymladmin@api.cloud.traders.us:/home/admin/"
                     script{
                         try{
-                            sh "ssh ec2-user@52.66.70.61 kubectl apply -f ."
+                            sh "ssh admin@api.cloud.traders.us kubectl apply -f ."
                         }catch(error){
-                            sh "ssh ec2-user@52.66.70.61 kubectl create -f ."
+                            sh "ssh admin@api.cloud.traders.us kubectl create -f ."
                         }
                     }
                 }
