@@ -1,11 +1,11 @@
 package middleware
 
 import (
-
 	"context"
 	"encoding/json"
 	"fmt"
 	"log"
+
 	//"time"
 	"net/http"
 
@@ -137,11 +137,9 @@ func UpdateUserProfile(w http.ResponseWriter, r *http.Request) {
 	var user models.User
 	_ = json.NewDecoder(r.Body).Decode(&user)
 	params := mux.Vars(r)
-	updateUserProfile(params["id"],user)
+	updateUserProfile(params["id"], user)
 	json.NewEncoder(w).Encode(user)
 }
-
-
 
 // DeleteTask delete one task route
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
@@ -197,7 +195,7 @@ func getAllUsers() []primitive.M {
 
 // Insert one task in the DB
 func insertOneUser(user models.User) {
-	fmt.Println("User  IS: ",user.Userid)
+	fmt.Println("User  IS: ", user.Userid)
 	insertResult, err := usercollection.InsertOne(context.Background(), user)
 
 	if err != nil {
@@ -238,18 +236,17 @@ func updateUser(user string) {
 }
 
 // task undo method, update task's status to false
-func updateUserProfile(userid string,user models.User) {
-	fmt.Println(userid)
-	id, _ := primitive.ObjectIDFromHex(userid)
-	filter := bson.M{"_id": id}
-	update := bson.M{"$set": bson.M{"email":user.Email,
-"firstname":user.Firstname,
-"lastname":user.Lastname,
-"phone":user.Phone,
-"profileimage":user.ProfileImage}}
+func updateUserProfile(userid string, user models.User) {
+	fmt.Println(user)
+	filter := bson.M{"userid": userid}
+	update := bson.M{"$set": bson.M{"email": user.Email,
+		"firstname":    user.Firstname,
+		"lastname":     user.Lastname,
+		"phone":        user.Phone,
+		"profileimage": user.ProfileImage}}
 	result, err := usercollection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("modified count: ", result.ModifiedCount)
@@ -280,4 +277,3 @@ func deleteAllUser() int64 {
 }
 
 //================================================User Functions End=========================================/
-

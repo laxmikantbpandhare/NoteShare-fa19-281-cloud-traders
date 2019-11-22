@@ -1,31 +1,26 @@
-// Imports
-import React from 'react'
-import { Route, Switch } from 'react-router-dom'
+import React from 'react';
+import logo from './logo.svg';
+import './App.css';
 
-// App Imports
-import Layout from './components/layout'
-import TweetListContainer from './components/tweet/list-container'
-import TweetAdd from './components/tweet/add'
-import Profile from './components/tweet/profile'
-import TweetViewContainer from './components/tweet/view-container'
-import UserLogin from './components/user/login'
-import UserRegister from './components/user/register'
-import About from './components/about'
-import PageNotFound from './components/page-not-found'
-import './Sidebar.css'
-const App = () => (
-  <Layout>  
-    <Switch>
-      <Route exact path="/" component={TweetListContainer}/>
-      <Route path="/tweet/add" component={TweetAdd}/>
-      <Route path="/tweet/:tweetId" component={TweetViewContainer}/>
-      <Route path="/user/login" component={UserLogin}/>
-      <Route path="/user/profile" component={Profile}/>
-      <Route path="/user/register" component={UserRegister}/>
-      <Route path="/about" component={About}/>
-      <Route component={PageNotFound}/>
-    </Switch>
-  </Layout>
-)
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
 
-export default App
+export default App;

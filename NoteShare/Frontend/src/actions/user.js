@@ -11,7 +11,7 @@ import firebase from '../config/fire';
 // import withFirebaseAuth from 'react-with-firebase-auth'
 
 import { beginApiCall, apiCallError } from '../actions/apistatus'
-import {SET_TWEETS,SET_TWEET} from './tweet'
+import {SET_TWEETS,SET_TWEET,SET_USER_TWEETS} from './tweet'
 
 export const USER_CURRENT_SET = 'USER_CURRENT_SET'
 
@@ -35,6 +35,9 @@ export const SIGNOUT_ERROR = "SIGNOUT_ERROR";
 // RESET PASSWORD
 export const RESET_SUCCESS = "RESET_SUCCESS";
 export const RESET_ERROR = "RESET_ERROR";
+
+// RESET PASSWORD
+export const GET_ALL_USERS = "GET_ALL_USERS";
 
 
 
@@ -152,6 +155,12 @@ export function userLogout (callback) {
     dispatch(setCurrentUser({}))
     dispatch(
       {
+        type: SET_USER_TWEETS,
+        tweets: []
+      } 
+    )
+    dispatch(
+      {
         type: SET_TWEETS,
         tweets: []
       } 
@@ -176,7 +185,7 @@ export function userLogout (callback) {
     )
 
     //return {success: true}
-    callback()
+   
   }
 }
 
@@ -324,7 +333,8 @@ export function updateProfile (input) {
       if (response) {
         console.log(response)
         //localStorage.setItem('uuid', response.uid)
-        //dispatch(setCurrentUser(response))
+        dispatch(setCurrentUser(input))
+
 
         return response.json()
       }
@@ -332,6 +342,34 @@ export function updateProfile (input) {
     // .then(data=> {
     //   callback(data);
     // })
+  }
+
+}
+
+export function getAllUsers () {
+  const uuid = localStorage.getItem('uuid')
+  return dispatch => {
+  console.log("Getting all users")
+  
+  return fetch(`${ config.url.api }api/user`).then((response) => {
+    if (response) {
+      console.log(response)
+      response.json().then((response) => {
+        //response!=[null] && response!=[] && response[0]!=null && response.length>0
+        if (response!=[null] && response!=[] && response[0]!=null && response.length>0) {
+          console.log(response)
+          dispatch({
+            type: GET_ALL_USERS,
+            payload: response
+          })
+        }
+      })
+    } else {
+      console.log('Looks like the response wasn\'t perfect, got status', response.status)
+    }
+  }, function (e) {
+    console.log('Fetch failed!', e)
+  })
   }
 
 }
