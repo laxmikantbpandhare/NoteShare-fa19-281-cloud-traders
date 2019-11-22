@@ -57,7 +57,7 @@ node {
 	publishHTML([allowMissing: false, 
 		     alwaysLinkToLastBuild: false,
 		     keepAll: true, 
-		     reportDir: '/var/lib/jenkins/workspace/CICD_backend_user_ruchika@tmp/', 
+		     reportDir: '/var/lib/jenkins/workspace/html_report/', 
 		     reportFiles: 'index.html', 
 		     reportName: 'HTML Report', 
 		     reportTitles: ''])	
