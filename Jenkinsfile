@@ -46,17 +46,6 @@ node {
          sh "./runtest.sh"
 	 
     }
-   stage ('HTML_REPORT')
-     {
-	publishHTML([allowMissing: false, 
-		     alwaysLinkToLastBuild: false,
-		     keepAll: true, 
-		     reportDir: '/var/lib/jenkins/workspace/html_report/', 
-		     reportFiles: 'index.html', 
-		     reportName: 'HTML Report', 
-		     reportTitles: ''])	
-
-    }
     stage('Remove Previous Container'){
 
 		def dockerRm = 'bash /home/centos/docker-cleaner.sh'
