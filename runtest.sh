@@ -44,4 +44,4 @@ fi
 
 rm -f $basedir/output/newman-run.html
 $newman run $basedir/tests/NoteShare.postman_collection.json -r cli,html --reporter-html-export $basedir/output
-mv $basedir/output/newman-run.html $basedir/output/00-nosql-ping-checks.html
+//mv $basedir/output/newman-run.html $basedir/output/00-nosql-ping-checks.html
