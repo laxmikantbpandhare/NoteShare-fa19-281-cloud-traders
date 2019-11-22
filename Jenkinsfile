@@ -65,11 +65,14 @@ node {
      }
 	stage ('Dev-server-test')
      {
-		def docker_command ="docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
+		def docker_command =""
 		sshagent(['Dev-server-test']) {
     			// some block
-			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${docker_command}"
-		}
+			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140"
+             }
+	     sh 'docker container stop $(docker container ls -aq)'
+	     sh 'docker container rm $(docker container ls -aq)'
+	     sh "docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
 		
 	}
 	
