@@ -61,17 +61,17 @@ node {
 
 		def dockerRm = 'docker rm -f dockerz'
 		sshagent(['Dev-server-test']) {
-			sh 'ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRm}'
+			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRm}"
 		}
 	
      }
 
 	stage ('Dev-server-test')
      {
-	        def dockerRun = sh "docker run --name dockerz -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
+	        def dockerRun = "docker run --name dockerz -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
 		sshagent(['Dev-server-test']) {
     			// some block
-			sh 'ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRun}'     
+			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRun}"     
 	 }
 	     
       }
