@@ -53,6 +53,14 @@ node {
 		sh 'docker container rm $(docker container ls -aq)'
 		deleteDir()
      }
-   
+	stage ('HTML_REPORT'){
+	publishHTML([allowMissing: false, 
+		     alwaysLinkToLastBuild: false,
+		     keepAll: true, 
+		     reportDir: '/output/', 
+		     reportFiles: 'index.html', 
+		     reportName: 'HTML Report', 
+		     reportTitles: ''])	
 
+	}
 }
