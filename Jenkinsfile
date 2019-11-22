@@ -53,7 +53,17 @@ node {
 		sh 'docker container rm $(docker container ls -aq)'
 		deleteDir()
      }
-	stage ('HTML_REPORT'){
+	stage ('Deploy_on_dev'){
+		def docker_command ="docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
+		sshagent(['slave1-cred']) {
+    			// some block
+			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 192.168.1.106 ${docker_command}"
+		}
+	        sh 
+		
+	}
+	stage ('HTML_REPORT')
+	{
 	publishHTML([allowMissing: false, 
 		     alwaysLinkToLastBuild: false,
 		     keepAll: true, 
