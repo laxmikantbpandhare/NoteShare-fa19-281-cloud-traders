@@ -68,11 +68,12 @@ node {
 	     }
 	     
       }
-		stage('cleaning') 
-      {
+	post {
+        always {
+          
 		sh 'docker container stop $(docker container ls -aq)'
 		sh 'docker container rm $(docker container ls -aq)'
 		deleteDir()
-      }
-	
+            }
+	}
 }
