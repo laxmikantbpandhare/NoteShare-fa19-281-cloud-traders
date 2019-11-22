@@ -46,8 +46,9 @@ node {
          sh "./runtest.sh"
 	    
     }
-    stage('Test API Rest') {
-        steps {
+    stage('Test API Rest') 
+	{
+       
             sh 'newman run tests/NoteShare.postman_collection.json -e tests/Newman/env/test.postman_environment.json -r junit,html --reporter-junit-export var/reports/newman/junit/newman.xml --reporter-html-export var/reports/newman/html/index.html'
 
             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'var/reports/newman/html', reportFiles: 'index.html', reportName: 'Newman API Test', reportTitles: ''])
