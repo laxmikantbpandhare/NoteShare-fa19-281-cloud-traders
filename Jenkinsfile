@@ -20,17 +20,17 @@ node {
 	slackSend color: 'good', message: "Building Docker-File"
 	sh "chmod 755 server"    
         sh "docker build -t 5467438/my-app:${env.BUILD_NUMBER} ."
-	 }
+	 
     }
     stage ("wait_docker_run") {
          echo 'Waiting 5 sec before running Docker image'
          sleep 5 
     }
-    stage('Push_Docker_Image'){
+   stage('Push_Docker_Image'){
 	slackSend color: 'good', message: "Pushing the image into5467438/my-app:${env.BUILD_NUMBER}"
         withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
         sh "docker login -u 5467438 -p ${dockerHubPwd}"
-    }    
+        }    
         sh "docker push 5467438/my-app:${env.BUILD_NUMBER}"
    }
    stage ("wait_docker_run") {
@@ -48,21 +48,8 @@ node {
          sh "./runtest.sh"
 	 
     }
-    stage('cleaning') {
-		sh 'docker container stop $(docker container ls -aq)'
-		sh 'docker container rm $(docker container ls -aq)'
-		deleteDir()
-     }
-	stage ('Dev-server-test'){
-		def docker_command ="docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
-		sshagent(['Dev-server-test']) {
-    			// some block
-			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${docker_command}"
-		}
-		
-	}
-	stage ('HTML_REPORT')
-	{
+   	 stage ('HTML_REPORT')
+     {
 	publishHTML([allowMissing: false, 
 		     alwaysLinkToLastBuild: false,
 		     keepAll: true, 
@@ -71,5 +58,21 @@ node {
 		     reportName: 'HTML Report', 
 		     reportTitles: ''])	
 
+    }
+	stage('cleaning') 
+    {
+		sh 'docker container stop $(docker container ls -aq)'
+		sh 'docker container rm $(docker container ls -aq)'
+		deleteDir()
+     }
+	stage ('Dev-server-test')
+     {
+		def docker_command ="docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
+		sshagent(['Dev-server-test']) {
+    			// some block
+			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${docker_command}"
+		}
+		
 	}
+	
 }
