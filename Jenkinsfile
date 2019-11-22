@@ -3,11 +3,9 @@ node {
     stage('Pull_from_Github') { 
         checkout scm
 	slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-	stage('notification to slack'){
-		slackSend color: 'good', message: "commited on branch : ${env.BRANCH_NAME}"
-	    
-    }
-    boolean unittestPassed = true	
+	slackSend color: 'good', message: "commited on branch : ${env.BRANCH_NAME}"
+	  
+    }	
     stage('Running unit tests')
     { 
 		slackSend color: 'good', message: "Starting unit test cases" 
@@ -20,7 +18,7 @@ node {
 	slackSend color: 'good', message: "Building Docker-File"
 	sh "chmod 755 server"    
         sh "docker build -t 5467438/my-app:${env.BUILD_NUMBER} ."
-	 
+    
     }
     stage ("wait_docker_run") {
          echo 'Waiting 5 sec before running Docker image'
