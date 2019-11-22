@@ -116,42 +116,12 @@ func AddFileToS3(fileDir string) {
 		os.Exit(1)
 	}
 	defer file.Close()
-	// objectStat, err := file.Stat()
-	// s3Client, err := minio.New("s3.amazonaws.com", "AKIASLAATNZ23OCL3JVB", "UM7wPSfe2OzWxe1yupPhKnCG7pP/moOInGAkxAFY", false)
- //    if err != nil {
- //        log.Fatalln(err)
- //    }
-
-    // object, err := os.Open("my-testfile")
-    // if err != nil {
-    //     log.Fatalln(err)
-    // }
-    // defer object.Close()
-
-    // n, err := s3Client.PutObject("noteshare-cmpe281", "all.json", file,objectStat.Size(), minio.PutObjectOptions{ContentType: "application/octet-stream"})
-    // if err != nil {
-    //     log.Fatalln(err)
-    // }
-    // log.Println("Uploaded", "all.json", " of size: ", n, "Successfully.")
 
 	 sess, err := session.NewSession(&aws.Config{
         Region: aws.String("us-east-1")},
     )
 
-// sess, err := session.NewSession(&aws.Config{
-//     Region:      aws.String("us-east-1"),
-//     Credentials: credentials.NewStaticCredentials("AKIASLAATNZ23OCL3JVB", "UM7wPSfe2OzWxe1yupPhKnCG7pP"),
-// })
-    
-// 	sess, err := session.NewSessionWithOptions(session.Options{
-//     Config: aws.Config{
-//         Region: aws.String("us-east-1"),
-//         Credentials: credentials.NewStaticCredentials("AKIASLAATNZ23OCL3JVB", "UM7wPSfe2OzWxe1yupPhKnCG7pP"),
-//     },
-//     //SessionConfigState: session.SharedConfigEnable,
-// })
-	//conf := aws.Config{Region: aws.String("us-east-1")}
-	//sess := session.New(&conf)
+
 	svc := s3manager.NewUploader(sess)
 
 	fmt.Println("Uploading file to S3...")
