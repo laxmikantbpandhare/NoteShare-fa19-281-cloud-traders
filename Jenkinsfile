@@ -61,7 +61,7 @@ node {
 
 		def dockerRm = 'docker rm -f dockerz'
 		sshagent(['Dev-server-test']) {
-			sh 'ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRm}"
+			sh 'ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRm}'
 		}
 	
      }
