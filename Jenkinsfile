@@ -57,7 +57,7 @@ node {
 	publishHTML([allowMissing: false, 
 		     alwaysLinkToLastBuild: false,
 		     keepAll: true, 
-		     reportDir: '/output/', 
+		     reportDir: 'output/', 
 		     reportFiles: 'index.html', 
 		     reportName: 'HTML Report', 
 		     reportTitles: ''])	
