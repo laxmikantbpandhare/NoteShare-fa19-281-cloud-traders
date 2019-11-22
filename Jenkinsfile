@@ -10,7 +10,7 @@ node {
     boolean unittestPassed = true	
     stage('Running unit tests')
     { 
-
+		slackSend color: 'good', message: "Starting unit test cases" 
 	   	sh " bash goshell.sh"
 		slackSend color: 'good', message: "All the unit Test cases were Passing"   
 	  
@@ -40,6 +40,7 @@ node {
         sh "docker login -u 5467438 -p ${dockerHubPwd}"
         }    
          sh "docker run --name docker${env.BUILD_NUMBER} -td -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
+	   slackSend color: 'good', message: "Started running Docker container" 
     }
     stage('Testing') {
 	 slackSend color: 'good', message: "Running Api-tests"  
