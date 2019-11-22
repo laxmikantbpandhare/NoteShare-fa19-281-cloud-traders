@@ -57,15 +57,24 @@ node {
 		     reportTitles: ''])	
 
     }
+	stage('Remove Previous Container'){
+	try{
+		def dockerRm = 'docker rm -f dockerz'
+		sshagent(['Dev-server-test']) {
+			sh "ssh -o StrictHostKeyChecking=no ec2-user@172.31.17.196 ${dockerRm}"
+		}
+	}catch(error){
+		//  do nothing if there is an exception
+	}
+ }
 
 	stage ('Dev-server-test')
      {
 		sshagent(['Dev-server-test']) {
     			// some block
-			sh 'ssh -o StrictHostKeyChecking=no centos@3.234.209.140'
-			
-	                sh "docker run --name docker${env.BUILD_NUMBER} -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
-	     }
+			def dockerRun = sh "docker run --name dockerz -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
+			sh 'ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRun}'     
+	 }
 	     
       }
 	post {
