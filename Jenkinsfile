@@ -8,14 +8,14 @@ node {
     }	
     stage('Running unit tests')
     { 
-		slackSend color: 'good', message: "Starting unit test cases" 
+		slackSend color: '#FFFF00', message: "Starting unit test cases" 
 	   	sh " bash goshell.sh"
 		slackSend color: 'good', message: "All the unit Test cases were Passing"   
 	  
     }
 
     stage('Building_DockerFile') { 
-	slackSend color: 'good', message: "Building Docker-File"
+	slackSend color: '#FFFF00', message: "Building Docker-File"
 	sh "chmod 755 server"    
         sh "docker build -t 5467438/my-app:${env.BUILD_NUMBER} ."
     
@@ -41,18 +41,13 @@ node {
 	   slackSend color: 'good', message: "Started running Docker container" 
     }
     stage('Testing') {
-	 slackSend color: 'good', message: "Running Api-tests"  
+	 slackSend color: '#FFFF00', message: "Running Api-tests"  
 	 sh "chmod +x ./runtest.sh" 
          sh "./runtest.sh"
+	 slackSend color: 'good', message: "All Test cases passed"  
 	    
-    }
-    stage('Test API Rest') 
-	{
-       
-            sh 'newman run tests/NoteShare.postman_collection.json -r junit,html --reporter-junit-export var/reports/newman/junit/newman.xml --reporter-html-export var/reports/newman/html/index.html'
-
-            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'var/reports/newman/html', reportFiles: 'index.html', reportName: 'Newman API Test', reportTitles: ''])
-        }	    
+	    
+    }    
     stage('Remove Previous Container'){
 
 		def dockerRm = 'bash /home/centos/docker-cleaner.sh'
@@ -62,7 +57,7 @@ node {
 		}
 		}catch(error){
 		//  do nothing if there is an exception
-		      slackSend color: 'bad', message: "No Containers to remove or error" 
+		      slackSend color: 'red', message: "No Containers to remove or error" 
 	      }
 			
 	
@@ -70,12 +65,13 @@ node {
 
 	stage ('Dev-server-test')
      {
+	        slackSend color: '#FFFF00', message: "No Containers to remove or error" 
 	        def dockerRun = "docker run --name dockerz -itd -p 8089:8080 5467438/my-app:${env.BUILD_NUMBER}"
 		sshagent(['Dev-server-test']) {
     			// some block
 			sh "ssh -o StrictHostKeyChecking=no centos@3.234.209.140 ${dockerRun}"     
 	 }
-	     
+	       slackSend color: 'good', message: "Container Deployed on Instance" 
       }
       } 
       finally {
