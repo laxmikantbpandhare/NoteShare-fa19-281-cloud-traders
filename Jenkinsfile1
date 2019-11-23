@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    environment{
+        DOCKER_TAG = getDockerTag()
+    }
+    stages{
+        stage('Build Docker Image'){
+            steps{
+                sh "chmod 755 server"
+                sh "docker build . -t 5467438/cloud_feed:${DOCKER_TAG} "
+            }
+        }
+        stage('DockerHub Push'){
+            steps{
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
+                    sh "docker login -u 5467438 -p ${dockerHubPwd}"
+                    sh "docker push 5467438/cloud_feed:${DOCKER_TAG}"
+                }
+            }
+        }
+        stage('Deploy to k8s'){
+            steps{
+                sh "chmod +x change-version.yaml"
+                sh "./change-version.yaml ${DOCKER_TAG}"
+                sshagent(['k8-passwords']) {
+                    sh "scp -o StrictHostKeyChecking=no service_feed.yml node-app-feed.yml admin@18.144.22.72:/home/admin/"
+                    script{
+                        try{
+                            sh "ssh admin@18.144.22.72 kubectl apply -f ."
+                        }catch(error){
+                            sh "ssh admin@18.144.22.72 kubectl create -f ."
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+def getDockerTag(){
+    def tag  = sh script: 'git rev-parse HEAD', returnStdout: true
+    return tag
+}
+
