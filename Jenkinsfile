@@ -30,7 +30,7 @@ node {
 
 		def dockerRm = 'bash /home/centos/docker-cleaner.sh'
 	        try{
-		sshagent(['Dev-server-test']) {
+		sshagent(['luck_pass']) {
 			sh "ssh -o StrictHostKeyChecking=no centos@34.193.177.101 ${dockerRm}"
 		}
 		}catch(error){
@@ -45,7 +45,7 @@ node {
      {
 	        slackSend color: '#FFFF00', message: "No Containers to remove or error" 
 	        def dockerRun = "docker run --name dockerz -itd -p 9003:8080 5467438/cloud_notes:${env.BUILD_NUMBER}"
-		sshagent(['Dev-server-test']) {
+		sshagent(['luck_pass']) {
     			// some block
 			sh "ssh -o StrictHostKeyChecking=no centos@34.193.177.101 ${dockerRun}"     
 	 }
