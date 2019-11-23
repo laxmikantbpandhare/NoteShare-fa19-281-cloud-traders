@@ -1,7 +1,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: follow
+  name: notes
   namespace: default
 spec:
   replicas: 2
