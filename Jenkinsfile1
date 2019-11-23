@@ -7,7 +7,7 @@ pipeline {
         stage('Build Docker Image'){
             steps{
                 sh "chmod 755 server"
-                sh "docker build . -t 5467438/cloud_feed:${DOCKER_TAG} "
+                sh "docker build . -t 5467438/cloud_user:${DOCKER_TAG} "
             }
         }
         stage('DockerHub Push'){
