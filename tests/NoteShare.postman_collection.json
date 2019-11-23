@@ -1,0 +1,53 @@
+{
+	"variables": [],
+	"info": {
+		"name": "user_test",
+		"_postman_id": "8143d9f8-9c86-584e-9f34-0c6771370e24",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "post http://localhost:8080/api/user ",
+			"request": {
+				"url": "http://localhost:8089/api/user",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103dhdhd\",\n   \"firstname\":\"cc\",\n   \"lastname\":\"Choucdjdjdcksey\",\n   \"username\":\"riticcka123\",\n   \"email\":\"pracddddccddhi@gmail.com\",\n   \"phone\":\"78787dddccxx87878\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get specific user copy",
+			"request": {
+				"url": "http://localhost:8089/api/user/103dhdhd",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"ritika\",\n   \"lastname\":\"Chouksey\",\n   \"username\":ritika123\",\n   \"email\":\"pracdddhi@gmail.com\",\n   \"phone\":\"78787xx87878\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get all users copy",
+			"request": {
+				"url": "http://localhost:8089/api/user",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"ritika\",\n   \"lastname\":\"Chouksey\",\n   \"username\":ritika123\",\n   \"email\":\"pracdddhi@gmail.com\",\n   \"phone\":\"78787xx87878\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
