@@ -32,6 +32,9 @@ NoteShare was developed for brainstorming, project tracking, story writing, outl
 
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/CI_CD_Pipeline.png)
 
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/CICD_Slack.png)
+
 First we created a docker image of jenkins but didn't work as expected as there are lot of configuratio and compatibility issues as it was running on docker.
 <ol>
 <li> Next we have taken an EC2-instance and made it a Jenkins-server by installing Java, Jenkins by default the jenkins was running  on port 8080 logged into Jenkins as admin and by installing the custom plugins .</li>
