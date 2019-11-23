@@ -11,7 +11,7 @@ node {
     stage('Building_DockerFile') { 
 	slackSend color: '#FFFF00', message: "Building Docker-File"
 	sh "chmod 755 server"    
-        sh "docker build -t 5467438/my-app:${env.BUILD_NUMBER} ."
+        sh "docker build -t 5467438/cloud_follow:${env.BUILD_NUMBER} ."
     
     }
     stage ("wait_docker_run") {
@@ -19,11 +19,11 @@ node {
          sleep 5 
     }
    stage('Push_Docker_Image'){
-	slackSend color: 'good', message: "Pushing the image into5467438/my-app:${env.BUILD_NUMBER}"
+	slackSend color: 'good', message: "Pushing the image into5467438/cloud_follow:${env.BUILD_NUMBER}"
         withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
         sh "docker login -u 5467438 -p ${dockerHubPwd}"
         }    
-        sh "docker push 5467438/my-app:${env.BUILD_NUMBER}"
+        sh "docker push 5467438/cloud_follow:${env.BUILD_NUMBER}"
    }
         
     stage('Remove Previous Container'){
@@ -44,7 +44,7 @@ node {
 	stage ('Dev-server-test')
      {
 	        slackSend color: '#FFFF00', message: "No Containers to remove or error" 
-	        def dockerRun = "docker run --name dockerz -itd -p 9002:8080 5467438/my-app:${env.BUILD_NUMBER}"
+	        def dockerRun = "docker run --name dockerz -itd -p 9002:8080 5467438/cloud_follow:${env.BUILD_NUMBER}"
 		sshagent(['Dev-server-test']) {
     			// some block
 			sh "ssh -o StrictHostKeyChecking=no centos@3.214.208.55 ${dockerRun}"     
