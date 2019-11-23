@@ -40,15 +40,6 @@ node {
 			
 	
      }
-	    stage ('Permission')
-     {
-	        slackSend color: '#FFFF00', message: "No Containers to remove or error" 
-	        def dockerPermission = "sudo chmod 777 /var/run/docker.sock"
-		sshagent(['Dev-server-test']) {
-    			// some block
-			sh "ssh -o StrictHostKeyChecking=no centos@3.214.208.55 ${dockerPermission}"     
-	 }
-     }
 
 	stage ('Dev-server-test')
      {
