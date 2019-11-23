@@ -6,6 +6,7 @@ pipeline {
     stages{
         stage('Build Docker Image'){
             steps{
+                sh "chmod 755 server"
                 sh "docker build . -t 5467438/cloud_search:${DOCKER_TAG} "
             }
         }
