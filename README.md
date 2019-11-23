@@ -54,16 +54,18 @@ First we created a docker image of jenkins but didn't work as expected as there 
 First understood the basic architecture of kubernetes master its components like kube-ctl, kube-proxy, kubelet.controller-manager, etcd, Api-server, container run time and how services and pods work
 
 #### First Attempt
-
+```
 In first deployment we used google kubernetes engine, its has a very simple deployment as google creates service and load balancer on your behalf all you have to do was deploy the docker-image as pods
+```
 
 #### Second Attempt
-
+```
 <ol>
 <li> In second deployment we used Amazon EKS service </li>
 <li> As as per documentation we created a ec-2 instance gave it iam role permissions and gave the EKS the k8 permissions </li>
 <li> when we trying to connct to kubernetes master via the EC2-instance from our end we were getting error's as it was unable to connect. </li>
 <li> So after some Online research we found this wa happening to a lot of people and the reason being the problem with the AmazonAuthentication(aws-iam-configuration API) Services where the token we were getting was null and this prevented us from geeting into kubernetes master </li>
+```
 
 #### Third Attempt
 ```
@@ -89,10 +91,9 @@ EventSourcing is persisting the state of the NoteShare application, however inst
 Creating Notes:
 <ol>
    <li> Client issues a POST  call to “/note/cmd” </li>
-      
-    <li>API interface receives the request and converts the payload  to a CommandMessage and passes it on to the responsible command handler </li>
-    <li>The handler creates an event, and then persists it to the eventlog. </li>
-    <li> The eventbus is then notified of the event and publishes it to all listeners of that type of event. </li>
+   <li>API interface receives the request and converts the payload  to a CommandMessage and passes it on to the responsible command handler </li>
+   <li>The handler creates an event, and then persists it to the eventlog. </li>
+   <li> The eventbus is then notified of the event and publishes it to all listeners of that type of event. </li>
 </ol>
 
 Reading Notes:
