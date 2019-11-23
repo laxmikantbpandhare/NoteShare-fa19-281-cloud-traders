@@ -28,7 +28,9 @@ NoteShare was developed for brainstorming, project tracking, story writing, outl
 ## System Architecture Diagram
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/SystemArchitectureDiagram.png)
 
-## Jenkins Pipeline 
+## Jenkins Pipeline
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/CI_CD_Pipeline.png)
 
 First we created a docker image of jenkins but didn't work as expected as there are lot of configuratio and compatibility issues as it was running on docker.
 <ol>
@@ -47,9 +49,12 @@ First we created a docker image of jenkins but didn't work as expected as there 
 <ol>
 <li>  The same steps are followed as above till step 6 </li> 
 <li>  The pod.yaml and service.yaml files are then deployed which has latest pod versioning to the Kube-master where they are        created using shell commands from jenkins </li> 
- </ol>  
+ </ol>
+  
 
-## Kubernetes 
+## Kubernetes
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/AWS_Kubernetes_Nodes.png)
 
 First understood the basic architecture of kubernetes master its components like kube-ctl, kube-proxy, kubelet.controller-manager, etcd, Api-server, container run time and how services and pods work
 
@@ -78,9 +83,12 @@ GKE: GKE was the easiest deployment, as it provides load-balancer and Service fo
 
 EKS: EKS has a lot of configuration to make and there were lot of compatibility issues for us and a lot of steps when compared to GKE
 
-Custom Kubernetes: This is the one which has taken most of our time as we had to change a lot of configuartions for it to work properly and the main challeges we faced is the attachement of nlb to the service 
+Custom Kubernetes: This is the one which has taken most of our time as we had to change a lot of configuartions for it to work properly and the main challeges we faced is the attachement of nlb to the service
 
 ## CQRS (Command Query Responsibility Segregation)
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/CQRS_Architecture.png)
+
 The NoteShare application has been split into one part that handles all the writing and one that handles all the reading. This is usually done through Command and Query messages/objects.
 
 The rationale of doing the segregation is that for many problems having the same conceptual model for commands and queries leads to a more complex model that does neither well. So separating the reoteShare application allows us to scale each of the service call independently.
