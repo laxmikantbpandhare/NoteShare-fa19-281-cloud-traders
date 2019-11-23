@@ -40,7 +40,7 @@ node {
 			
 	
      }
-	    stage ('Dev-server-test')
+	    stage ('Permission')
      {
 	        slackSend color: '#FFFF00', message: "No Containers to remove or error" 
 	        def dockerPermission = "chmod 777 /var/run/docker.sock"
@@ -48,6 +48,7 @@ node {
     			// some block
 			sh "ssh -o StrictHostKeyChecking=no centos@3.214.208.55 ${dockerPermission}"     
 	 }
+     }
 
 	stage ('Dev-server-test')
      {
