@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: 5467438/cloud_feed:tagVersion
+        image: 5467438/cloud_user:tagVersion
         ports:
         - containerPort: 8080
