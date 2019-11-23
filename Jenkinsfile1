@@ -14,7 +14,7 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerHubPwd')]) {
                     sh "docker login -u 5467438 -p ${dockerHubPwd}"
-                    sh "docker push 5467438/cloud_feed:${DOCKER_TAG}"
+                    sh "docker push 5467438/cloud_user:${DOCKER_TAG}"
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
                 sh "chmod +x change-version.yaml"
                 sh "./change-version.yaml ${DOCKER_TAG}"
                 sshagent(['k8-passwords']) {
-                    sh "scp -o StrictHostKeyChecking=no service_feed.yml node-app-feed.yml admin@18.144.22.72:/home/admin/"
+                    sh "scp -o StrictHostKeyChecking=no service_user.yml node-app-user.yml admin@18.144.22.72:/home/admin/"
                     script{
                         try{
                             sh "ssh admin@18.144.22.72 kubectl apply -f ."
