@@ -369,7 +369,7 @@ export function getAllUsers () {
   return dispatch => {
   console.log("Getting all users")
   
-  return fetch(`${ config.url.api }api/users/all/${ uuid }`).then((response) => {
+  return fetch(`${ config.url.api }api/user/all/${ uuid }`).then((response) => {
     if (response) {
       console.log(response)
       response.json().then((response) => {
