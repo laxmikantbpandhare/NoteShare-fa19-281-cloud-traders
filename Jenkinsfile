@@ -37,7 +37,7 @@ node {
         withCredentials([string(credentialsId: 'docker-pwd', variable: 'dockerHubPwd')]) {
         sh "docker login -u 5467438 -p ${dockerHubPwd}"
         }    
-         sh "docker run --name docker${env.BUILD_NUMBER} -td -p 8089:8080 5467438/cloud_user:${env.BUILD_NUMBER}"
+         sh "docker run --name docker${env.BUILD_NUMBER} -td -p 9004:8080 5467438/cloud_user:${env.BUILD_NUMBER}"
 	   slackSend color: 'good', message: "Started running Docker container" 
     }
     stage('Testing') {
@@ -66,7 +66,7 @@ node {
 	stage ('Dev-server-test')
      {
 	        slackSend color: '#FFFF00', message: "No Containers to remove or error" 
-	        def dockerRun = "docker run --name dockerz -itd -p 8089:8080 5467438/cloud_user:${env.BUILD_NUMBER}"
+	        def dockerRun = "docker run --name dockerz -itd -p 9004:8080 5467438/cloud_user:${env.BUILD_NUMBER}"
 		sshagent(['ruchika_pass']) {
     			// some block
 			sh "ssh -o StrictHostKeyChecking=no centos@52.203.195.163 ${dockerRun}"     
