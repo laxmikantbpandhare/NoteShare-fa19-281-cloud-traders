@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
+	//"log"
 	//"time"
 	"net/http"
 
@@ -202,7 +202,7 @@ func DeleteAllUser(w http.ResponseWriter, r *http.Request) {
 func GetAllUsersInternal() []primitive.M {
 	cur, err := usercollection.Find(context.Background(), bson.D{{}})
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	var results []primitive.M
@@ -210,7 +210,7 @@ func GetAllUsersInternal() []primitive.M {
 		var result bson.M
 		e := cur.Decode(&result)
 		if e != nil {
-			log.Fatal(e)
+			fmt.Println("err:", err)
 		}
 		// fmt.Println("cur..>", cur, "result", reflect.TypeOf(result), reflect.TypeOf(result["_id"]))
 		results = append(results, result)
@@ -218,7 +218,7 @@ func GetAllUsersInternal() []primitive.M {
 	}
 
 	if err := cur.Err(); err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	cur.Close(context.Background())
@@ -231,7 +231,7 @@ func InsertOneUserInternal(user models.User) {
 	insertResult, err := usercollection.InsertOne(context.Background(), user)
 
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Inserted a Single Record ", insertResult.InsertedID)
@@ -246,7 +246,7 @@ func GetUserInternal(user string) primitive.M {
 	err := usercollection.FindOne(context.Background(), filter).Decode(&result)
 	fmt.Println("", err)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Get User:", result)
@@ -261,7 +261,7 @@ func updateUser(user string) {
 	update := bson.M{"$set": bson.M{"status": false}}
 	result, err := usercollection.UpdateOne(context.Background(), filter, update)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("modified count: ", result.ModifiedCount)
@@ -274,7 +274,7 @@ func deleteUser(user string) {
 	filter := bson.M{"_id": id}
 	d, err := usercollection.DeleteOne(context.Background(), filter)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Deleted Document", d.DeletedCount)
@@ -284,7 +284,7 @@ func deleteUser(user string) {
 func deleteAllUser() int64 {
 	d, err := usercollection.DeleteMany(context.Background(), bson.D{{}}, nil)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Deleted Document", d.DeletedCount)
@@ -298,7 +298,7 @@ func GetUserByUserIdInternal(user string) primitive.M {
 	err := usercollection.FindOne(context.Background(), filter).Decode(&result)
 	fmt.Println("", err)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println("err:", err)
 	}
 
 	fmt.Println("Get User:", result)
