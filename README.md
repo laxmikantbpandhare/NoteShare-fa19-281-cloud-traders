@@ -59,6 +59,8 @@ First we created a docker image of jenkins but didn't work as expected as there 
 
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/AWS_Kubernetes_Nodes.png)
 
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/Custom_Kuber_Cluster.jpeg)
+
 First understood the basic architecture of kubernetes master its components like kube-ctl, kube-proxy, kubelet.controller-manager, etcd, Api-server, container run time and how services and pods work
 
 #### First Attempt
