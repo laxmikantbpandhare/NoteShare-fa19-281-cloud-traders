@@ -1,11 +1,10 @@
 package middleware
 
 import (
-
 	"context"
 	"encoding/json"
 	"fmt"
-	"log"
+
 	//"time"
 	"net/http"
 
@@ -75,7 +74,6 @@ func PingHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(payload)
 }
 
-
 //================================================Follow Functions Start=========================================/
 
 // TaskComplete update task route
@@ -87,7 +85,7 @@ func FollowUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	payload := followUser(params["id"],params["userid"])
+	payload := followUser(params["id"], params["userid"])
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -100,7 +98,7 @@ func UnfollowUser(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	params := mux.Vars(r)
-	payload := unfollowUser(params["id"],params["userid"])
+	payload := unfollowUser(params["id"], params["userid"])
 	json.NewEncoder(w).Encode(payload)
 }
 
@@ -117,81 +115,79 @@ func GetFollowing(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(payload)
 }
 
-
-func followUser(id1 string, userid1 string ) primitive.M {
-	userid:=userid1
-	id:=id1
+func followUser(id1 string, userid1 string) primitive.M {
+	userid := userid1
+	id := id1
 	var follow models.Follow
-	if(id!=userid) {
-			count, _ := followcollection.CountDocuments(context.Background(), bson.M{"_id": id});
-			if count == 0 {
-				var intarray []string
-				intarray = append(intarray,userid)
-				insertResult, err := followcollection.InsertOne(context.Background(), bson.M{
-					"_id":  id,
-					"userid": intarray,
-				})
-				if err != nil {
-					fmt.Println("err:", err)
-				}
-				fmt.Println("Following list added: ", insertResult.InsertedID)
-			} else {
-
-				err := followcollection.FindOne(context.TODO(),bson.M{"_id": id}).Decode(&follow)
-				if err != nil {
-					fmt.Println("error1")
-					fmt.Println("err:", err)
-				}
-				follow.Userid = append(follow.Userid,userid)
-				filter := bson.M{"_id": id}
-				update := bson.M{"$set": bson.M{"userid": follow.Userid}}
-				result, err := followcollection.UpdateOne(context.Background(), filter, update)
-				if err != nil {
-					fmt.Println("error3")
-					fmt.Println("err:", err)
-				}
-				fmt.Println("Following list added: ", result.ModifiedCount)
-
+	if id != userid {
+		count, _ := followcollection.CountDocuments(context.Background(), bson.M{"_id": id})
+		if count == 0 {
+			var intarray []string
+			intarray = append(intarray, userid)
+			insertResult, err := followcollection.InsertOne(context.Background(), bson.M{
+				"_id":    id,
+				"userid": intarray,
+			})
+			if err != nil {
+				fmt.Println("err:", err)
 			}
-}
+			fmt.Println("Following list added: ", insertResult.InsertedID)
+		} else {
+
+			err := followcollection.FindOne(context.TODO(), bson.M{"_id": id}).Decode(&follow)
+			if err != nil {
+				fmt.Println("error1")
+				fmt.Println("err:", err)
+			}
+			follow.Userid = append(follow.Userid, userid)
+			filter := bson.M{"_id": id}
+			update := bson.M{"$set": bson.M{"userid": follow.Userid}}
+			result, err := followcollection.UpdateOne(context.Background(), filter, update)
+			if err != nil {
+				fmt.Println("error3")
+				fmt.Println("err:", err)
+			}
+			fmt.Println("Following list added: ", result.ModifiedCount)
+
+		}
+	}
 
 	var userlist primitive.M
 	userlist = getFollowing(id)
 	return userlist
 }
 
-func unfollowUser(id1 string, userid1 string ) primitive.M {
+func unfollowUser(id1 string, userid1 string) primitive.M {
 	userid := userid1
 	id := id1
-	if(id!=userid) {
-			var result models.Follow
+	if id != userid {
+		var result models.Follow
 
-			count, _ := followcollection.CountDocuments(context.Background(), bson.M{"_id": id});
-			if count == 0 {
+		count, _ := followcollection.CountDocuments(context.Background(), bson.M{"_id": id})
+		if count == 0 {
 
-
-			} else {
-				err := followcollection.FindOne(context.Background(),bson.M{"_id": id}).Decode(&result)
-				if err != nil {
-					fmt.Println("err:", err)
-				}
-
-				for i := 0; i < len(result.Userid); i++ {
-					if result.Userid[i] == userid {
-						result.Userid = append(result.Userid[:i], result.Userid[i+1:]...)
-						i-- // form the remove item index to start iterate next item
-					}
-				}
-				filter := bson.M{"_id": id}
-				update := bson.M{"$set": bson.M{"userid": result.Userid}}
-				result, err := followcollection.UpdateOne(context.Background(), filter, update)
-				if err != nil {
-					fmt.Println("err:", err)
-				}
-				fmt.Println("Following user removed: ", result.ModifiedCount)
-
+		} else {
+			err := followcollection.FindOne(context.Background(), bson.M{"_id": id}).Decode(&result)
+			if err != nil {
+				fmt.Println("err:", err)
 			}
+
+			for i := 0; i < len(result.Userid); i++ {
+				if result.Userid[i] == userid {
+					result.Userid = append(result.Userid[:i], result.Userid[i+1:]...)
+					i-- // form the remove item index to start iterate next item
+				}
+			}
+			filter := bson.M{"_id": id}
+			update := bson.M{"$set": bson.M{"userid": result.Userid}}
+			result, err := followcollection.UpdateOne(context.Background(), filter, update)
+			if err != nil {
+				fmt.Println("err:", err)
+			}
+			fmt.Println("Following user removed: ", result.ModifiedCount)
+
 		}
+	}
 	var userlist primitive.M
 	userlist = getFollowing(id)
 	return userlist
@@ -212,7 +208,4 @@ func getFollowing(id1 string) primitive.M {
 	return result
 }
 
-
-
 //================================================Follow Functions End=========================================/
-

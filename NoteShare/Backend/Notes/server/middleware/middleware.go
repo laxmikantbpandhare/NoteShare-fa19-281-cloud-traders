@@ -29,7 +29,6 @@ import (
 	"io"
 	"os"
 	"path/filepath"
-	
 )
 
 // DB connection string
@@ -62,8 +61,8 @@ var todoProjection *todo.Projection
 var staticPath string
 
 const (
-    S3_REGION = ""
-    S3_BUCKET = ""
+	S3_REGION = ""
+	S3_BUCKET = ""
 )
 
 // create connection with mongo db
@@ -116,7 +115,7 @@ func init() {
 	cmdHandler.RegisterCommand("createTodoItem", todo.CreateTodoItem)
 	cmdHandler.RegisterCommand("removeTodoItem", todo.RemoveTodoItem)
 	cmdHandler.RegisterCommand("updateTodoItem", todo.UpdateTodoItem)
-	
+
 	go cmdHandler.Start()
 	go eventBus.Start()
 
@@ -129,7 +128,7 @@ func init() {
 		}
 	}()
 
-	http.HandleFunc("/api/cmd/", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/note/cmd/", func(w http.ResponseWriter, r *http.Request) {
 
 		//CreateTweet(w, r)
 
@@ -264,7 +263,7 @@ func createNoteCQRS(msg models.Tweet) {
 
 	insertResult, err := tweetcollection.InsertOne(context.Background(), bson.M{
 		"userid": msg.Userid,
-		"data":    msg.Data,
+		"data":   msg.Data,
 		"topic":  msg.Topic,
 		"time":   msg.Created,
 	})
@@ -340,7 +339,6 @@ func GetUserTweetInternal(user string) []primitive.M {
 		return results
 	}
 }
-
 
 // func AddFileToS3(fileDir string) error {
 

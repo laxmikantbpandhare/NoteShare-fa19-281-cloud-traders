@@ -28,7 +28,7 @@ export function fetchTweets () {
 
     const uuid = localStorage.getItem('uuid')
 
-    return fetch(`${ config.url.api }api/user/tweet/${ uuid }`).then((response) => {
+    return fetch(`${ config.url.api }api/note/user/${ uuid }`).then((response) => {
       if (response) {
         console.log(response)
         response.json().then((response) => {
@@ -104,7 +104,7 @@ export function fetchTweetsUsers (id) {
       type: FETCH_USER_TWEETS_BEGIN
     })
 
-    return fetch(`${ config.url.api }api/user/tweet/${ id }`).then((response) => {
+    return fetch(`${ config.url.api }api/note/user/${ id }`).then((response) => {
       if (response) {
         console.log(response)
         response.json().then((response) => {
@@ -179,7 +179,7 @@ export function fetchTweet (tweetId) {
     })
     const uuid = localStorage.getItem('uuid')
 
-    return fetch(`${ config.url.api }api/user/tweet/${ uuid }`).then((response) => {
+    return fetch(`${ config.url.api }api/note/get/${ uuid }`).then((response) => {
       if (response) {
         console.log(response)
         response.json().then((response) => {
@@ -206,7 +206,7 @@ export function postTweet (tweet) {
   console.log(tweet)
   return dispatch => {
     //return fetch(`${ config.url.api }api/tweet/${ uuid }`, {
-    return fetch(`${ config.url.api }api/cmd/`, {
+    return fetch(`${ config.url.api }api/note/cmd/`, {
       method: 'post',
 
       body: JSON.stringify(tweet),
@@ -232,7 +232,7 @@ export function follow (id) {
 
     const uuid = localStorage.getItem('uuid')
 
-    return fetch(`${ config.url.api }api/follow/${ uuid }/${id}`, {
+    return fetch(`${ config.url.api }api/follow/user/${ uuid }/${id}`, {
       method: 'post',
 
       //body: JSON.stringify(tweet),
@@ -270,7 +270,7 @@ export function unfollow (id) {
 
     const uuid = localStorage.getItem('uuid')
 
-    return fetch(`${ config.url.api }api/unfollow/${ uuid }/${id}`, {
+    return fetch(`${ config.url.api }api/follow/unfollow/${ uuid }/${id}`, {
       method: 'post',
 
       //body: JSON.stringify(tweet),

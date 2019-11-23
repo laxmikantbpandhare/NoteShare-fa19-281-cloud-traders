@@ -81,7 +81,7 @@ var uuid = "";
 export function postLogin (uuid,callback) {
   
     console.log("In post login")
-    return fetch(`${ config.url.api }api/user/${ uuid }`, {
+    return fetch(`${ config.url.api }api/user/get/${ uuid }`, {
       method: 'get',
 
      //body: JSON.stringify(uuid),
@@ -118,7 +118,7 @@ export function postLogin (uuid,callback) {
     console.log('credentials');
     console.log(credentials);
    // return fetch(`${ config.url.api }user/register`, {
-    return fetch(`${ config.url.api }api/user`, {
+    return fetch(`${ config.url.api }api/user/create`, {
       method: 'post',
 
       body: JSON.stringify(credentials),
@@ -338,7 +338,7 @@ export function updateProfile (input) {
   const uuid = localStorage.getItem('uuid')
   return dispatch => {
   console.log("In update profile")
-  return fetch(`${ config.url.api }api/user/profile/${ uuid }`, {
+  return fetch(`${ config.url.api }api/profile/user/${ uuid }`, {
     method: 'put',
 
    body: JSON.stringify(input),
@@ -369,7 +369,7 @@ export function getAllUsers () {
   return dispatch => {
   console.log("Getting all users")
   
-  return fetch(`${ config.url.api }api/users/${ uuid }`).then((response) => {
+  return fetch(`${ config.url.api }api/users/all/${ uuid }`).then((response) => {
     if (response) {
       console.log(response)
       response.json().then((response) => {
