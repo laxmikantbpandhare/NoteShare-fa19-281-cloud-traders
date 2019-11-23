@@ -1,4 +1,27 @@
-# Team Hackathon Project
+# NoteShare
+
+The whole process of missing class, trying to get notes from classmates by going through their notebook, finding the right notes then taking pictures is frustrating and unreliable. Most times professors only post a segment of what they do in class, and those additional notes are hard to acquire. This is a solution to bring students who might not necessarily know each other together on a single widget platform to share important notes that would be relevant to the class. 
+
+NoteShare was developed for brainstorming, project tracking, story writing, outlining and other collaborative efforts from students and teachers, scientists and researchers, creative artists and others. The software lets you create content that includes text, live Web pages, sketches, file attachments and other material.
+
+## Members 
+   | Name                           | SJSU ID    |
+   |--------------------------------|------------|
+   | **Laxmikant Bhaskar Pandhare** | 013859989  |
+   | **Prachi Chouksey**            | 013828945  |
+   | **Ruchika Hazariwal**          | 013728923  |
+   | **Sai Manvith**                | 013848211  |
+   | **Suyash Srivastava**          | 013591474  |
+
+## Modules 
+
+| Name       | Who            |
+|------------|----------------|
+|Users       | Ruchika        |
+|Notes       | Sai            |
+|Profile     | Laxmikant      |
+|Search      | Prachi         |
+|Follow      | Suyash         |
 
 
 
