@@ -120,3 +120,18 @@ In case of traditional Read/Write to database, the application does a lot of tra
 
 ### Challenges/Concerns
 Adding CQRS to a domain that doesn’t have much difference between read and write, increases the complexity of the application and the events handling a little tedious.
+
+## Grafana
+
+As we have more than 20 instances for our project, metric watch became hectic as we have to switch between different instances and accounts so in order to overcome this we used grafana which was deployed on Centos instance using Docker . Grafana helped us to aggregate all the metrics at one place.
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/Grafana-Dashboard.png)
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/Grafana-Instances.png)
+
+## Application Dashboard
+A glimpse of the application
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-Home.png)
+
+![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-CreateNote.png)
