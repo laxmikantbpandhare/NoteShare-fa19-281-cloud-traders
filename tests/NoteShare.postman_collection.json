@@ -8,9 +8,9 @@
 	},
 	"item": [
 		{
-			"name": "post http://localhost:8080/api/user ",
+			"name": "post http://localhost:8080/api/user copy",
 			"request": {
-				"url": "http://localhost:8089/api/user",
+				"url": "http://localhost:8080/api/user/create",
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -24,21 +24,7 @@
 		{
 			"name": "get specific user copy",
 			"request": {
-				"url": "http://localhost:8089/api/user/103dhdhd",
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n   \"userid\":\"103\",\n   \"firstname\":\"ritika\",\n   \"lastname\":\"Chouksey\",\n   \"username\":ritika123\",\n   \"email\":\"pracdddhi@gmail.com\",\n   \"phone\":\"78787xx87878\"\n}"
-				},
-				"description": ""
-			},
-			"response": []
-		},
-		{
-			"name": "get all users copy",
-			"request": {
-				"url": "http://localhost:8089/api/user",
+				"url": "http://localhost:8080/api/user/103dhdhd",
 				"method": "GET",
 				"header": [],
 				"body": {
