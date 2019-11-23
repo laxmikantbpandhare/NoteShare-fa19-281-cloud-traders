@@ -8,7 +8,8 @@ const initialState = {
   isAuthenticated: false,
   user: {},
   signin_success: false,
-  signup_success: false
+  signup_success: false,
+  users:[]
 }
 
 export default (state = initialState, action) => {
@@ -28,6 +29,11 @@ export default (state = initialState, action) => {
       return {
        ...state,
        signin_success: action.payload.successLogin
+      }
+      case "GET_ALL_USERS":
+      return {
+       ...state,
+       users: action.payload
       }
     default:
       return state

@@ -21,6 +21,7 @@ class Profile extends Component {
     super(props)
 
     this.state = {
+      _id: '',
       firstname: '',
       lastname: '',
       phone:'',
@@ -40,6 +41,7 @@ class Profile extends Component {
       {
           this.setState(
               {
+                _id: this.props.user.user._id,
                 firstname: this.props.user.user.firstname,
                 lastname: this.props.user.user.lastname,
                 phone:this.props.user.user.phone,
@@ -60,6 +62,7 @@ class Profile extends Component {
     this.setState({isLoading: true})
 
     let input = {}
+    input._id = this.state._id
     input.firstname = this.state.firstname
     input.lastname = this.state.lastname
     input.phone = this.state.phone
@@ -70,7 +73,7 @@ class Profile extends Component {
       this.props.updateProfile(input).then((response) => {
         if (response) {
           console.log(response)
-          this.setState({isLoading: false, notification: true, text: '', error: '', tweetId: response._id})
+          this.setState({isLoading: false, notification: true, text: '', error: ''})
         } else {
           this.setState({isLoading: false, error: "error"})
         }

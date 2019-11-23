@@ -48,7 +48,7 @@ class TweetAdd extends Component {
           console.log(response)
           this.setState({isLoading: false, notification: true, text: '', error: '', tweetId: response._id})
         } else {
-          this.setState({isLoading: false, error: "error"})
+          this.setState({isLoading: false, error: ""})
         }
       })
     } else {

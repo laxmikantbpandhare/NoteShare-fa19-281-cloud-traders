@@ -1,8 +1,9 @@
 .navbar-fixed-left {
-    width: 15%;
-    position: fixed;
+    width: 20%;
+    position: relative;
     border-radius: 0;
     height: 100%;
+    overflow-y: scroll;
   }
 
   .navbar-fixed-left .navbar-nav > li{
@@ -16,6 +17,25 @@
 
   .nav>li>a {
     position: relative;
-    display: block;
+    display: table-row;
     padding: 10px 10px;
   }
+
+  .navbar-inverse {
+    background-color: #eee;
+    border-color: #eee;
+}
+
+.nav>li {
+  position: relative;
+  display: table-row;
+  font-size: 10 px;
+  padding: 50px 50px;
+
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+  font-size: 18 px
+}

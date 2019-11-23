@@ -6,19 +6,29 @@ import moment from 'moment'
 
 // UI Imports
 import { Card, CardTitle } from 'material-ui/Card'
+import CardText from 'material-ui/Card/CardText';
 
 function TweetList ({tweets}) {
   console.log(tweets)
+  //console.log(id)
   const emptyMessage = (
     <p>No tweets to show.</p>
   )
 
   const tweetsList = (
-    tweets.map(({_id, msg, time}) => (
-      <Card key={_id}>
-        <Link to={`/tweet/${ _id }`}><CardTitle title={msg} subtitle={moment(time).fromNow()}/></Link>
+    tweets.map(({_id, data, time, topic, userid}) => (
+      <div>
+      <Card key={_id} style = {{padding:'20px'}}>
+        <Link to={`/tweet/${ _id }`}><CardTitle title={topic}  subtitle={moment(time).fromNow()}/>
+        <CardText>{data}
+        </CardText>
+        </Link>
       </Card>
+      <br/>
+      <br/>
+      </div>
     ))
+    
   )
 
   return (

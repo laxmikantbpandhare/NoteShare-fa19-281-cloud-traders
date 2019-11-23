@@ -13,7 +13,7 @@ import TextField from 'material-ui/TextField'
 import { Card, CardText } from 'material-ui/Card'
 
 // App Imports
-import { signin } from '../../actions/user'
+import { signin,getAllUsers } from '../../actions/user'
 
 class UserLogin extends Component {
   constructor (props) {
@@ -43,6 +43,7 @@ class UserLogin extends Component {
       this.setState({isLoggingIn: true, isLoading: true})
 
       this.props.signin(input);
+      this.props.getAllUsers();
 
     }
   }
@@ -116,7 +117,8 @@ class UserLogin extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    signin: data => {dispatch(signin(data))}
+    signin: data => {dispatch(signin(data))},
+    getAllUsers: () => {dispatch(getAllUsers())}
   }
 }
 

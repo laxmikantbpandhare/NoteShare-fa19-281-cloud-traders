@@ -1,6 +1,6 @@
 // Imports
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
@@ -24,7 +24,7 @@ class UserButtonLogged extends Component {
   logout (event) {
     event.preventDefault()
 
-    this.props.userLogout(()=>this.props.history.push("/user/login"))
+    this.props.userLogout()
   }
 
   render () {
@@ -32,7 +32,9 @@ class UserButtonLogged extends Component {
       <>
         <Link to="/tweet/add"><FlatButton label="Create Note"/></Link>
         <FlatButton label="Sign out" onClick={this.logout.bind(this)} />
+        {this.props.successful ? <Redirect to="/"/> : ''}  
       </>
+      
     )
   }
 }
@@ -41,4 +43,10 @@ UserButtonLogged.propTypes = {
   userLogout: PropTypes.func.isRequired,
 }
 
-export default connect(null, {userLogout})(UserButtonLogged)
+const mapStateToProps = state => {
+  return{
+    successful: state.user.signin_success
+  }
+}
+
+export default connect(mapStateToProps, {userLogout})(UserButtonLogged)

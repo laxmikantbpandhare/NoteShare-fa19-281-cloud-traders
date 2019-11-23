@@ -18,7 +18,7 @@ import registerServiceWorker from './registerServiceWorker'
 import { PersistGate } from "redux-persist/lib/integration/react";
 import { setCurrentUser } from './actions/user'
 import rootReducer from './reducers/root'
-import App from './app'
+import App from './app'  
 import './index.css'
 
 

@@ -161,6 +161,24 @@ export function userLogout (callback) {
     )
     dispatch(
       {
+        type: "GET_ALL_USERS",
+        users: []
+      } 
+    )
+    // dispatch(
+    //   {
+    //     type: "SET_FOLLOW",
+    //     followlist: []
+    //   } 
+    // )
+    dispatch(
+      {
+        type: "SET_USER_TWEETS",
+        userlist: []
+      } 
+    )
+    dispatch(
+      {
         type: SET_TWEETS,
         tweets: []
       } 
@@ -351,7 +369,7 @@ export function getAllUsers () {
   return dispatch => {
   console.log("Getting all users")
   
-  return fetch(`${ config.url.api }api/user`).then((response) => {
+  return fetch(`${ config.url.api }api/users/${ uuid }`).then((response) => {
     if (response) {
       console.log(response)
       response.json().then((response) => {
