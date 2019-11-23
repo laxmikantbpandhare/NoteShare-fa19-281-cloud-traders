@@ -264,7 +264,7 @@ func createNoteCQRS(msg models.Tweet) {
 
 	insertResult, err := tweetcollection.InsertOne(context.Background(), bson.M{
 		"userid": msg.Userid,
-		"msg":    msg.Data,
+		"data":    msg.Data,
 		"topic":  msg.Topic,
 		"time":   msg.Created,
 	})
