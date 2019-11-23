@@ -10,7 +10,7 @@ node {
 
     stage('Building_DockerFile') { 
 	slackSend color: '#FFFF00', message: "Building Docker-File"
-	sh "chmod 755 server"    
+	sh "chmod 777 server"    
         sh "docker build -t 5467438/cloud_follow:${env.BUILD_NUMBER} ."
     
     }
