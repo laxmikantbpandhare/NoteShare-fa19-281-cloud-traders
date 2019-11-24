@@ -136,12 +136,26 @@ A glimpse of the application
 
 Signup
 
-
+![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/signup.png)
 
 Login
 
 ![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/login.png)
 
+Notes View
+
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-Home.png)
 
+Notes
+
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-CreateNote.png)
+
+Edit Profile Before
+
+![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/edit%20Profile%20Before.png)
+
+Edit Profile After
+
+![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/edit%20Profile%20After.png)
+
+
