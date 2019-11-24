@@ -134,27 +134,27 @@ As we have more than 20 instances for our project, metric watch became hectic as
 ## Application Dashboard
 A glimpse of the application
 
-Signup
+### Signup
 
 ![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/signup.png)
 
-Login
+### Login
 
 ![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/login.png)
 
-Notes View
+### Notes View
 
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-Home.png)
 
-Notes
+### Notes
 
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-CreateNote.png)
 
-Edit Profile Before
+### Edit Profile Before
 
 ![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/edit%20Profile%20Before.png)
 
-Edit Profile After
+### Edit Profile After
 
 ![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/edit%20Profile%20After.png)
 
