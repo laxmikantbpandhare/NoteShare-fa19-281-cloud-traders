@@ -158,4 +158,17 @@ A glimpse of the application
 
 ![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/edit%20Profile%20After.png)
 
+### View Other's Notes
+
+![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/view%20others%20notes.png)
+
+
+### Search
+
+![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/search.png)
+
+### follow and unfollow
+
+![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/follow%20unfollow.png)
+
 
