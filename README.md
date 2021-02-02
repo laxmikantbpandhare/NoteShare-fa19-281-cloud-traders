@@ -24,7 +24,6 @@ NoteShare was developed for brainstorming, project tracking, story writing, outl
 |Follow      | Suyash         |
 
 
-
 ## System Architecture Diagram
 ![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/SystemArchitectureDiagram.png)
 
@@ -170,5 +169,4 @@ A glimpse of the application
 ### follow and unfollow
 
 ![alt text](https://github.com/laxmikantbpandhare/fa19-281-cloud-traders/blob/master/images/follow%20unfollow.png)
-
 
