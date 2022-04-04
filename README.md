@@ -37,7 +37,7 @@ NoteShare was developed for brainstorming, project tracking, story writing, outl
 First we created a docker image of jenkins but didn't work as expected as there are lot of configuratio and compatibility issues as it was running on docker.
 <ol>
 <li> Next we have taken an EC2-instance and made it a Jenkins-server by installing Java, Jenkins by default the jenkins was running  on port 8080 logged into Jenkins as admin and by installing the custom plugins .</li>
-<li> Installed plugins like SSHAgent, Slack notification, Docker in global plugin tab which are required for the project \
+<li> Installed plugins like SSHAgent, Slack notification, Docker in global plugin tab which are required for the project.
 <li> Next created a new Multi-Brach pipeline in the jenkins for which we connected to our Github project. </li>
 <li> Wrote pipeline script in JenkinsPipeline. </li>
 <li> Launched web-hooks from Github to the JenkinsServer so that when ever a push comes the pipeline will start automatically.
