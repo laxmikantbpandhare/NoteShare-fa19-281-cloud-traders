@@ -25,7 +25,7 @@ NoteShare was developed for brainstorming, project tracking, story writing, outl
 
 
 ## System Architecture Diagram
-![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/tree/master/images)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/tree/master/images/SystemArchitectureDiagram.png)
 
 ## Jenkins Pipeline
 
