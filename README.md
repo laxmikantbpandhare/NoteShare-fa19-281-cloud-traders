@@ -2,7 +2,7 @@
 
 The whole process of missing class, trying to get notes from classmates by going through their notebook, finding the right notes then taking pictures is frustrating and unreliable. Most times professors only post a segment of what they do in class, and those additional notes are hard to acquire. This is a solution to bring students who might not necessarily know each other together on a single widget platform to share important notes that would be relevant to the class. 
 
-NoteShare was developed for brainstorming, project tracking, story writing, outlining and other collaborative efforts from students and teachers, scientists and researchers, creative artists and others. The software lets you create content that includes text, live Web pages, sketches, file attachments and other material.
+NoteShare was developed for brainstorming, project tracking, story writing, outlining, and other collaborative efforts from students and teachers, scientists and researchers, creative artists, and others. The software lets you create content that includes text, live Web pages, sketches, file attachments, and other material.
 
 ## Members 
    | Name                           | SJSU ID    |
@@ -25,14 +25,14 @@ NoteShare was developed for brainstorming, project tracking, story writing, outl
 
 
 ## System Architecture Diagram
-![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/tree/master/images/SystemArchitectureDiagram.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/SystemArchitectureDiagram.png)
 
 ## Jenkins Pipeline
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/CI_CD_Pipeline.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/CI_CD_Pipeline.png)
 
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/CICD_Slack.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/CICD_Slack.png)
 
 First we created a docker image of jenkins but didn't work as expected as there are lot of configuratio and compatibility issues as it was running on docker.
 <ol>
@@ -56,11 +56,11 @@ First we created a docker image of jenkins but didn't work as expected as there 
 
 ## Kubernetes
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/AWS_Kubernetes_Nodes.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/AWS_Kubernetes_Nodes.png)
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/Custom_Kuber_Cluster.jpeg)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/Custom_Kuber_Cluster.jpeg)
 
-First understood the basic architecture of kubernetes master its components like kube-ctl, kube-proxy, kubelet.controller-manager, etcd, Api-server, container run time and how services and pods work
+First understand the basic architecture of kubernetes master its components like kube-ctl, kube-proxy, kubelet.controller-manager, etcd, Api-server, container run time and how services and pods work
 
 #### First Attempt
 
@@ -91,7 +91,7 @@ Custom Kubernetes: This is the one which has taken most of our time as we had to
 
 ## CQRS (Command Query Responsibility Segregation)
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/CQRS_Architecture.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/CQRS_Architecture.png)
 
 The NoteShare application has been split into one part that handles all the writing and one that handles all the reading. This is usually done through Command and Query messages/objects.
 
@@ -126,9 +126,9 @@ Adding CQRS to a domain that doesn’t have much difference between read and wri
 
 As we have more than 20 instances for our project, metric watch became hectic as we have to switch between different instances and accounts so in order to overcome this we used grafana which was deployed on Centos instance using Docker . Grafana helped us to aggregate all the metrics at one place.
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/Grafana-Dashboard.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/Grafana-Dashboard.png)
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/Grafana-Instances.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/Grafana-Instances.png)
 
 ## Application Dashboard
 A glimpse of the application
@@ -143,11 +143,11 @@ A glimpse of the application
 
 ### Notes View
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-Home.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/NoteShare-Home.png)
 
 ### Notes
 
-![alt text](https://github.com/nguyensjsu/fa19-281-cloud-traders/blob/master/images/NoteShare-CreateNote.png)
+![alt text](https://github.com/laxmikantbpandhare/NoteShare-fa19-281-cloud-traders/blob/master/images/NoteShare-CreateNote.png)
 
 ### Edit Profile Before
 
